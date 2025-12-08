@@ -32,6 +32,7 @@ import { Card } from "./components/ui/card";
 import { Input } from "./components/ui/input";
 import { Button } from "./components/ui/button";
 import { Badge } from "./components/ui/badge";
+import ThankYou from "./components/ThankYou";
 
 export default function App() {
   const [email, setEmail] = useState("");
@@ -41,13 +42,20 @@ export default function App() {
     useState(false);
   const [showFaviconPreview, setShowFaviconPreview] =
     useState(false); // Скрыто
+  const [showThankYou, setShowThankYou] = useState(false);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
+      setShowThankYou(true);
       setIsSubscribed(true);
-      setTimeout(() => setEmail(""), 300);
     }
+  };
+
+  const handleBackToHome = () => {
+    setShowThankYou(false);
+    setIsSubscribed(false);
+    setEmail("");
   };
 
   const LogoComponent = [
@@ -58,6 +66,11 @@ export default function App() {
     LogoVariant5,
     LogoVariant6,
   ][selectedLogo - 1];
+
+  // Показываем Thank You страницу
+  if (showThankYou) {
+    return <ThankYou email={email} onBack={handleBackToHome} />;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950">
