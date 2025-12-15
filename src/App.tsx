@@ -33,6 +33,8 @@ import { Input } from "./components/ui/input";
 import { Button } from "./components/ui/button";
 import { Badge } from "./components/ui/badge";
 import ThankYou from "./components/ThankYou";
+import EmailPreview from "./components/EmailPreview";
+import ArticleGuide from "./components/ArticleGuide";
 
 export default function App() {
   const [email, setEmail] = useState("");
@@ -43,6 +45,8 @@ export default function App() {
   const [showFaviconPreview, setShowFaviconPreview] =
     useState(false); // Скрыто
   const [showThankYou, setShowThankYou] = useState(false);
+  const [showEmailPreview, setShowEmailPreview] = useState(false);
+  const [showArticleGuide, setShowArticleGuide] = useState(false);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,6 +70,16 @@ export default function App() {
     LogoVariant5,
     LogoVariant6,
   ][selectedLogo - 1];
+
+  // Показываем Email Preview страницу
+  if (showEmailPreview) {
+    return <EmailPreview />;
+  }
+
+  // Показываем Article Guide страницу
+  if (showArticleGuide) {
+    return <ArticleGuide />;
+  }
 
   // Показываем Thank You страницу
   if (showThankYou) {
@@ -397,7 +411,7 @@ export default function App() {
                       Базовая оценка стоимости
                     </h4>
                     <p className="text-blue-200/90">
-                      Расчёт рыночной цены и цены переуступки —
+                      Расчёт рыночной ены и цены переуступки —
                       на основе кадастровой стоимости и
                       аналогов. Доступен для всех лотов.
                     </p>
@@ -712,7 +726,7 @@ export default function App() {
       {/* Footer */}
       <footer className="relative z-10 py-12 border-t border-white/10 bg-gradient-to-b from-transparent to-slate-900/50">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Left - Logo and Description */}
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-3 group">
@@ -728,6 +742,23 @@ export default function App() {
               <p className="text-blue-100/70 hidden md:block">
                 Аналитика земельного рынка
               </p>
+            </div>
+
+            {/* Center - Email Preview Link */}
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setShowArticleGuide(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-blue-300 hover:bg-white/10 hover:border-cyan-500/30 transition-all group"
+              >
+                <span className="text-sm">📄 Гайд: 7 рисков</span>
+              </button>
+              
+              <button
+                onClick={() => setShowEmailPreview(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-blue-300 hover:bg-white/10 hover:border-cyan-500/30 transition-all group"
+              >
+                <span className="text-sm">📧 Email-шаблон</span>
+              </button>
             </div>
 
             {/* Right - Year */}
