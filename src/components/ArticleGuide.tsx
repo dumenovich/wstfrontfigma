@@ -10,24 +10,30 @@ export default function ArticleGuide() {
   const handleDownloadPDF = () => {
     window.print();
   };
-  
+
   // Добавляем класс для управления колонтитулом на первой странице
   React.useEffect(() => {
     const handleBeforePrint = () => {
       // При печати добавляем специальный класс
-      document.body.classList.add('is-printing');
+      document.body.classList.add("is-printing");
     };
-    
+
     const handleAfterPrint = () => {
-      document.body.classList.remove('is-printing');
+      document.body.classList.remove("is-printing");
     };
-    
-    window.addEventListener('beforeprint', handleBeforePrint);
-    window.addEventListener('afterprint', handleAfterPrint);
-    
+
+    window.addEventListener("beforeprint", handleBeforePrint);
+    window.addEventListener("afterprint", handleAfterPrint);
+
     return () => {
-      window.removeEventListener('beforeprint', handleBeforePrint);
-      window.removeEventListener('afterprint', handleAfterPrint);
+      window.removeEventListener(
+        "beforeprint",
+        handleBeforePrint,
+      );
+      window.removeEventListener(
+        "afterprint",
+        handleAfterPrint,
+      );
     };
   }, []);
 
@@ -72,8 +78,8 @@ export default function ArticleGuide() {
             <br />7 скрытых рисков лотов на торгах
           </h1>
           <p className="text-xl text-slate-600 mb-8">
-            zemscan.ru — сервис умного мониторинга земельных
-            торгов
+            zemscan.ru — сервис автоматической проверки
+            земельных лотов
           </p>
           <div className="inline-block px-6 py-2 border-2 border-slate-300 rounded">
             <p className="text-sm text-slate-500">
@@ -84,7 +90,6 @@ export default function ArticleGuide() {
 
         {/* Introduction */}
         <section className="mb-12 print:mb-8">
-          <div className="running-header">Введение</div>
           <h2 className="text-2xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-300">
             Введение
           </h2>
@@ -143,8 +148,13 @@ export default function ArticleGuide() {
         </section>
 
         {/* Risk 1 */}
-        <section className="mb-12 print:mb-8 print:page-break-before">
-          <div className="running-header">Риск 01: Участок в охранной зоне</div>
+        <section
+          className="mb-12 print:mb-8 print:page-break-before"
+          data-section-title="Риск 01: Участок в охранной зоне"
+        >
+          <div className="running-header">
+            Риск 01: Участок в охранной зоне
+          </div>
           <div className="flex items-center gap-4 mb-4">
             <span className="text-5xl font-bold text-blue-600 flex-shrink-0">
               01
@@ -200,14 +210,16 @@ export default function ArticleGuide() {
           </div>
 
           <div className="bg-slate-50 rounded-lg p-6 print:break-inside-avoid">
+            <div className="running-header">
+              Риск 01: Участок в охранной зоне
+            </div>
             <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
               <span>📋</span> Как проверить самостоятельно
             </h3>
             <div className="space-y-4">
               <div>
                 <p className="font-semibold text-slate-800 mb-2">
-                  1. Публичная кадастровая карта
-                  (pkk.rosreestr.ru)
+                  1. Публичная кадастровая карта (nspd.gov.ru)
                 </p>
                 <ul className="space-y-1 text-slate-600 ml-4 text-sm">
                   <li>
@@ -236,13 +248,22 @@ export default function ArticleGuide() {
                   </li>
                   <li>• Срок получения: 14–30 рабочих дней</li>
                   <li>
-                    • ГПЗУ содержит: предельные параметры застройки (этажность, плотность, отступы), зоны с особыми условиями использования (СЗЗ, охранные зоны, водоохранные полосы), требования к архитектурному облику зданий
+                    • ГПЗУ содержит: предельные параметры
+                    застройки (этажность, плотность, отступы),
+                    зоны с особыми условиями использования (СЗЗ,
+                    охранные зоны, водоохранные полосы),
+                    требования к архитектурному облику зданий
                   </li>
                   <li>
-                    • В некоторых случаях в ГПЗУ уже зашиты ограничения, которые делают проект нерентабельным (например, уменьшение полезной площади застройки из-за санитарных разрывов)
+                    • В некоторых случаях в ГПЗУ уже зашиты
+                    ограничения, которые делают проект
+                    нерентабельным (например, уменьшение
+                    полезной площади застройки из-за санитарных
+                    разрывов)
                   </li>
                 </ul>
               </div>
+
               <div>
                 <p className="font-semibold text-slate-800 mb-2">
                   3. Запрос в Росреестр
@@ -262,7 +283,6 @@ export default function ArticleGuide() {
                   </li>
                 </ul>
               </div>
-              <div className="running-header">Риск 01: Участок в охранной зоне</div>
               <div>
                 <p className="font-semibold text-slate-800 mb-2">
                   4. Проверка газопроводов и ЛЭП
@@ -293,7 +313,6 @@ export default function ArticleGuide() {
 
         {/* Risk 2 */}
         <section className="mb-12 print:mb-8 print:page-break-before">
-          <div className="running-header">Риск 02: Неподходящая категория земли или ВРИ</div>
           <div className="flex items-center gap-4 mb-4">
             <span className="text-5xl font-bold text-blue-600 flex-shrink-0">
               02
@@ -365,6 +384,9 @@ export default function ArticleGuide() {
           </div>
 
           <div className="bg-slate-50 rounded-lg p-6 print:break-inside-avoid">
+            <div className="running-header">
+              Риск 02: Неподходящая категория земли или ВРИ
+            </div>
             <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
               <span>📋</span> Как проверить самостоятельно
             </h3>
@@ -382,6 +404,7 @@ export default function ArticleGuide() {
                   <li>• Стоимость: 350–870 ₽</li>
                 </ul>
               </div>
+
               <div>
                 <p className="font-semibold text-slate-800 mb-2">
                   2. Публичная кадастровая карта
@@ -394,7 +417,6 @@ export default function ArticleGuide() {
                   </li>
                 </ul>
               </div>
-              <div className="running-header">Риск 02: Неподходящая категория земли или ВРИ</div>
               <div>
                 <p className="font-semibold text-slate-800 mb-2">
                   3. Правила землепользования и застройки (ПЗЗ)
@@ -440,7 +462,6 @@ export default function ArticleGuide() {
 
         {/* Risk 3 */}
         <section className="mb-12 print:mb-8 print:page-break-before">
-          <div className="running-header">Риск 03: Отсутствие коммуникаций</div>
           <div className="flex items-center gap-4 mb-4">
             <span className="text-5xl font-bold text-blue-600 flex-shrink-0">
               03
@@ -534,19 +555,26 @@ export default function ArticleGuide() {
               </li>
               <li>
                 • «Электричество есть» — но свободной мощности
-                может не быть. Наличие сетей поблизости не гарантирует наличие свободной мощности для подключения
+                может не быть. Наличие сетей поблизости не
+                гарантирует наличие свободной мощности для
+                подключения
               </li>
               <li>
                 • Вода только из скважины, а бурение в этом
                 районе стоит 500 000 ₽
               </li>
               <li>
-                • Даже при видимых коммуникациях требуется официальное подтверждение технической возможности подключения
+                • Даже при видимых коммуникациях требуется
+                официальное подтверждение технической
+                возможности подключения
               </li>
             </ul>
           </div>
 
           <div className="bg-slate-50 rounded-lg p-6 print:break-inside-avoid">
+            <div className="running-header">
+              Риск 03: Отсутствие коммуникаций
+            </div>
             <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
               <span>📋</span> Как проверить самостоятельно
             </h3>
@@ -587,7 +615,6 @@ export default function ArticleGuide() {
                   <li>• Получите предварительные техусловия</li>
                 </ul>
               </div>
-              <div className="running-header">Риск 03: Отсутствие коммуникаций</div>
               <div>
                 <p className="font-semibold text-slate-800 mb-2">
                   3. Вода
@@ -621,7 +648,7 @@ export default function ArticleGuide() {
                     частная, отсутствует)
                   </li>
                   <li>
-                    • Если дорога частная — н��жен сервитут от
+                    • Если дорога частная — нужен сервитут от
                     соседей
                   </li>
                 </ul>
@@ -641,7 +668,6 @@ export default function ArticleGuide() {
 
         {/* Risk 4 */}
         <section className="mb-12 print:mb-8 print:page-break-before">
-          <div className="running-header">Риск 04: Проблемы с границами и соседями</div>
           <div className="flex items-center gap-4 mb-4">
             <span className="text-5xl font-bold text-blue-600 flex-shrink-0">
               04
@@ -690,6 +716,9 @@ export default function ArticleGuide() {
           </div>
 
           <div className="bg-slate-50 rounded-lg p-6 print:break-inside-avoid">
+            <div className="running-header">
+              Риск 04: Проблемы с границами и соседями
+            </div>
             <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
               <span>📋</span> Как проверить самостоятельно
             </h3>
@@ -738,7 +767,6 @@ export default function ArticleGuide() {
                   </li>
                 </ul>
               </div>
-              <div className="running-header">Риск 04: Проблемы с границами и соседями</div>
               <div>
                 <p className="font-semibold text-slate-800 mb-2">
                   4. Кадастровый инженер
@@ -782,7 +810,6 @@ export default function ArticleGuide() {
 
         {/* Risk 5 */}
         <section className="mb-12 print:mb-8 print:page-break-before">
-          <div className="running-header">Риск 05: Арест, залог или другие обременения</div>
           <div className="flex items-center gap-4 mb-4">
             <span className="text-5xl font-bold text-blue-600 flex-shrink-0">
               05
@@ -834,6 +861,9 @@ export default function ArticleGuide() {
           </div>
 
           <div className="bg-slate-50 rounded-lg p-6 print:break-inside-avoid">
+            <div className="running-header">
+              Риск 05: Арест, залог или другие обременения
+            </div>
             <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
               <span>📋</span> Как проверить самостоятельно
             </h3>
@@ -869,7 +899,6 @@ export default function ArticleGuide() {
                   </li>
                 </ul>
               </div>
-              <div className="running-header">Риск 05: Арест, залог или другие обременения</div>
               <div>
                 <p className="font-semibold text-slate-800 mb-2">
                   3. Проверка на банкротство
@@ -912,7 +941,6 @@ export default function ArticleGuide() {
 
         {/* Risk 6 */}
         <section className="mb-12 print:mb-8 print:page-break-before">
-          <div className="running-header">Риск 06: Низкая ликвидность и реальная рыночная стоимость</div>
           <div className="flex items-center gap-4 mb-4">
             <span className="text-5xl font-bold text-blue-600 flex-shrink-0">
               06
@@ -964,6 +992,10 @@ export default function ArticleGuide() {
           </div>
 
           <div className="bg-slate-50 rounded-lg p-6 print:break-inside-avoid">
+            <div className="running-header">
+              Риск 06: Низкая ликвидность и реальная рыночная
+              стоимость
+            </div>
             <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
               <span>📋</span> Как проверить самостоятельно
             </h3>
@@ -1005,7 +1037,6 @@ export default function ArticleGuide() {
                   <li>• Срок: 3–7 дней</li>
                 </ul>
               </div>
-              <div className="running-header">Риск 06: Низкая ликвидность и реальная рыночная стоимость</div>
               <div>
                 <p className="font-semibold text-slate-800 mb-2">
                   4. Анализ инфраструктуры
@@ -1033,7 +1064,6 @@ export default function ArticleGuide() {
 
         {/* Risk 7 */}
         <section className="mb-12 print:mb-8 print:page-break-before">
-          <div className="running-header">Риск 07: Недостоверная информация в извещении о торгах</div>
           <div className="flex items-center gap-4 mb-4">
             <span className="text-5xl font-bold text-blue-600 flex-shrink-0">
               07
@@ -1076,6 +1106,10 @@ export default function ArticleGuide() {
           </div>
 
           <div className="bg-slate-50 rounded-lg p-6 print:break-inside-avoid">
+            <div className="running-header">
+              Риск 07: Недостоверная информация в извещении о
+              торгах
+            </div>
             <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
               <span>📋</span> Как проверить самостоятельно
             </h3>
@@ -1105,7 +1139,6 @@ export default function ArticleGuide() {
                   </li>
                 </ul>
               </div>
-              <div className="running-header">Риск 07: Недостоверная информация в извещении о торгах</div>
               <div>
                 <p className="font-semibold text-slate-800 mb-2">
                   3. Обязательный осмотр
@@ -1143,13 +1176,14 @@ export default function ArticleGuide() {
 
         {/* Additional Risks */}
         <section className="mb-12 print:mb-8 print:page-break-before">
-          <div className="running-header">Дополнительные факторы, о которых забывают</div>
           <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-2 border-b border-slate-300">
             Дополнительные факторы, о которых забывают
           </h2>
 
           <p className="text-slate-700 mb-6 leading-relaxed">
-            Помимо основных 7 рисков, есть факторы, которые могут существенно повлиять на стоимость и сроки реализации проекта:
+            Помимо основных 7 рисков, есть факторы, которые
+            могут существенно повлиять на стоимость и сроки
+            реализации проекта:
           </p>
 
           <div className="space-y-6">
@@ -1158,12 +1192,24 @@ export default function ArticleGuide() {
                 🏗️ Кадастровая стоимость
               </h3>
               <p className="text-slate-700 mb-2 text-sm">
-                Влияет не только на земельный налог, но и на размер арендной платы при аренде у государства. Завышенная кадастровая стоимость может значительно увеличить ежегодные расходы.
+                Влияет не только на земельный налог, но и на
+                размер арендной платы при аренде у государства.
+                Завышенная кадастровая стоимость может
+                значительно увеличить ежегодные расходы.
               </p>
               <ul className="space-y-1 text-slate-600 text-sm ml-4">
-                <li>• Земельный налог: 0,3–1,5% от кадастровой стоимости</li>
-                <li>• Арендная плата за госземли: 0,01–2% от кадастровой стоимости в год</li>
-                <li>• Переоценка требует экспертизы и судебных издержек от 50 000 ₽</li>
+                <li>
+                  • Земельный налог: 0,3–1,5% от кадастровой
+                  стоимости
+                </li>
+                <li>
+                  • Арендная плата за госземли: 0,01–2% от
+                  кадастровой стоимости в год
+                </li>
+                <li>
+                  • Переоценка требует экспертизы и судебных
+                  издержек от 50 000 ₽
+                </li>
               </ul>
             </div>
 
@@ -1172,13 +1218,28 @@ export default function ArticleGuide() {
                 📐 Площадь и конфигурация участка
               </h3>
               <p className="text-slate-700 mb-2 text-sm">
-                Сложная форма или наличие «врезов» может сильно сократить полезную площадь под застройку. При проектировании это оборачивается лишними согласованиями и переработкой генплана.
+                Сложная форма или наличие «врезов» может сильно
+                сократить полезную площадь под застройку. При
+                проектировании это оборачивается лишними
+                согласованиями и переработкой генплана.
               </p>
               <ul className="space-y-1 text-slate-600 text-sm ml-4">
-                <li>• Узкие участки (соотношение сторон больше 1:3) усложняют размещение объектов</li>
-                <li>• Участки с большим перепадом высот увеличивают стоимость земляных работ на 20–40%</li>
-                <li>• Неправильная форма может уменьшить полезную площадь застройки на 30–50%</li>
-                <li>• «Врезы» других собственников делают планирование практически невозможным</li>
+                <li>
+                  • Узкие участки (соотношение сторон больше
+                  1:3) усложняют размещение объектов
+                </li>
+                <li>
+                  • Участки с большим перепадом высот
+                  увеличивают стоимость земляных работ на 20–40%
+                </li>
+                <li>
+                  • Неправильная форма может уменьшить полезную
+                  площадь застройки на 30–50%
+                </li>
+                <li>
+                  • «Врезы» других собственников делают
+                  планирование практически невозможным
+                </li>
               </ul>
             </div>
 
@@ -1187,29 +1248,53 @@ export default function ArticleGuide() {
                 🌊 Инженерно-геологические условия
               </h3>
               <p className="text-slate-700 mb-2 text-sm">
-                Слабые грунты или высокий уровень грунтовых вод могут увеличить стоимость фундамента на 15–25%.
+                Слабые грунты или высокий уровень грунтовых вод
+                могут увеличить стоимость фундамента на 15–25%.
               </p>
               <ul className="space-y-1 text-slate-600 text-sm ml-4">
-                <li>• Необходимость инженерно-геологических изысканий (от 30 000 ₽)</li>
+                <li>
+                  • Необходимость инженерно-геологических
+                  изысканий (от 30 000 ₽)
+                </li>
                 <li>• Усиленный фундамент на слабых грунтах</li>
-                <li>• Дренажные системы при высоком УГВ (от 100 000 ₽)</li>
-                <li>• Дополнительная гидроизоляция подвальных помещений</li>
+                <li>
+                  • Дренажные системы при высоком УГВ (от 100
+                  000 ₽)
+                </li>
+                <li>
+                  • Дополнительная гидроизоляция подвальных
+                  помещений
+                </li>
               </ul>
             </div>
-            
-            <div className="running-header">Дополнительные факторы, о которых забывают</div>
+
+            <div className="running-header">
+              Дополнительные факторы, о которых забывают
+            </div>
             <div className="border-l-4 border-orange-500 pl-6 print:break-inside-avoid">
               <h3 className="font-semibold text-slate-900 mb-3">
                 🌿 Экологическая ситуация
               </h3>
               <p className="text-slate-700 mb-2 text-sm">
-                Рядом с промышленными зонами это критично для жилья и социальной инфраструктуры.
+                Рядом с промышленными зонами это критично для
+                жилья и социальной инфраструктуры.
               </p>
               <ul className="space-y-1 text-slate-600 text-sm ml-4">
-                <li>• Близость к промышленным объектам влияет на здоровье и ликвидность</li>
-                <li>• Загрязнение почвы может потребовать рекультивации (от 500 000 ₽)</li>
-                <li>• Шумовое загрязнение от магистралей и производств</li>
-                <li>• Проверка радиационного фона и состава почвы</li>
+                <li>
+                  • Близость к промышленным объектам влияет на
+                  здоровье и ликвидность
+                </li>
+                <li>
+                  • Загрязнение почвы может потребовать
+                  рекультивации (от 500 000 ₽)
+                </li>
+                <li>
+                  • Шумовое загрязнение от магистралей и
+                  производств
+                </li>
+                <li>
+                  • Проверка радиационного фона и состава почвы
+                </li>
               </ul>
             </div>
 
@@ -1218,12 +1303,20 @@ export default function ArticleGuide() {
                 ⚖️ Юридическая чистота
               </h3>
               <p className="text-slate-700 mb-2 text-sm">
-                История участка и его правообладателей может скрывать неприятные сюрпризы.
+                История участка и его правообладателей может
+                скрывать неприятные сюрпризы.
               </p>
               <ul className="space-y-1 text-slate-600 text-sm ml-4">
-                <li>• Проверка всей цепочки переходов права собственности</li>
-                <li>• Наличие незарегистрированных наследников</li>
-                <li>• Оспаривание сделок купли-продажи в прошлом</li>
+                <li>
+                  • Проверка всей цепочки переходов права
+                  собственности
+                </li>
+                <li>
+                  • Наличие незарегистрированных наследников
+                </li>
+                <li>
+                  • Оспаривание сделок купли-продажи в прошлом
+                </li>
                 <li>• Самовольные постройки на участке</li>
               </ul>
             </div>
@@ -1232,7 +1325,6 @@ export default function ArticleGuide() {
 
         {/* Summary Table */}
         <section className="mb-12 print:mb-8 print:page-break-before">
-          <div className="running-header">Итого: что нужно проверить перед покупкой</div>
           <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-2 border-b border-slate-300">
             Итого: что нужно проверить перед покупкой
           </h2>
@@ -1348,7 +1440,9 @@ export default function ArticleGuide() {
 
         {/* zemscan Automation */}
         <section className="mb-12 print:mb-8 print:page-break-before">
-          <div className="running-header">Что автоматизирует zemscan</div>
+          <div className="running-header">
+            Что автоматизирует zemscan
+          </div>
           <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-2 border-b border-slate-300">
             Что автоматизирует zemscan
           </h2>
@@ -1503,9 +1597,8 @@ export default function ArticleGuide() {
 
         {/* Checklist */}
         <section className="mb-12 print:mb-8 print:page-break-before">
-          <div className="running-header">Чек-лист проверки участка</div>
           <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-2 border-b border-slate-300">
-            Чек-лист проверки ��частка
+            Чек-лист проверки участка
           </h2>
 
           <p className="text-slate-700 mb-6">
@@ -1531,7 +1624,8 @@ export default function ArticleGuide() {
                     className="mt-1 w-4 h-4 print:w-5 print:h-5"
                   />
                   <span>
-                    ГПЗУ получен и изучен (параметры застройки приемлемы)
+                    ГПЗУ получен и изучен (параметры застройки
+                    приемлемы)
                   </span>
                 </label>
                 <label className="flex items-start gap-3 text-slate-700 cursor-pointer hover:bg-slate-50 p-2 rounded">
@@ -1634,7 +1728,8 @@ export default function ArticleGuide() {
                     className="mt-1 w-4 h-4 print:w-5 print:h-5"
                   />
                   <span>
-                    Электричество — возможность подключения и свободная мощность уточнены
+                    Электричество — возможность подключения и
+                    свободная мощность уточнены
                   </span>
                 </label>
                 <label className="flex items-start gap-3 text-slate-700 cursor-pointer hover:bg-slate-50 p-2 rounded">
@@ -1643,7 +1738,8 @@ export default function ArticleGuide() {
                     className="mt-1 w-4 h-4 print:w-5 print:h-5"
                   />
                   <span>
-                    Газ — возможность подключения и свободная мощность уточнены
+                    Газ — возможность подключения и свободная
+                    мощность уточнены
                   </span>
                 </label>
                 <label className="flex items-start gap-3 text-slate-700 cursor-pointer hover:bg-slate-50 p-2 rounded">
@@ -1677,7 +1773,8 @@ export default function ArticleGuide() {
                     className="mt-1 w-4 h-4 print:w-5 print:h-5"
                   />
                   <span>
-                    Кадастровая стоимость проверена (налоги и арендна�� плата приемлемы)
+                    Кадастровая стоимость проверена (налоги и
+                    арендная плата приемлемы)
                   </span>
                 </label>
                 <label className="flex items-start gap-3 text-slate-700 cursor-pointer hover:bg-slate-50 p-2 rounded">
@@ -1686,7 +1783,8 @@ export default function ArticleGuide() {
                     className="mt-1 w-4 h-4 print:w-5 print:h-5"
                   />
                   <span>
-                    Форма участка удобная (нет узких мест и врезов)
+                    Форма участка удобная (нет узких мест и
+                    врезов)
                   </span>
                 </label>
                 <label className="flex items-start gap-3 text-slate-700 cursor-pointer hover:bg-slate-50 p-2 rounded">
@@ -1695,7 +1793,8 @@ export default function ArticleGuide() {
                     className="mt-1 w-4 h-4 print:w-5 print:h-5"
                   />
                   <span>
-                    Рельеф подходит (нет критичных перепадов высот)
+                    Рельеф подходит (нет критичных перепадов
+                    высот)
                   </span>
                 </label>
                 <label className="flex items-start gap-3 text-slate-700 cursor-pointer hover:bg-slate-50 p-2 rounded">
@@ -1704,7 +1803,8 @@ export default function ArticleGuide() {
                     className="mt-1 w-4 h-4 print:w-5 print:h-5"
                   />
                   <span>
-                    Инженерно-геологические условия приемлемы (грунты, УГВ)
+                    Инженерно-геологические условия приемлемы
+                    (грунты, УГВ)
                   </span>
                 </label>
                 <label className="flex items-start gap-3 text-slate-700 cursor-pointer hover:bg-slate-50 p-2 rounded">
@@ -1722,7 +1822,8 @@ export default function ArticleGuide() {
                     className="mt-1 w-4 h-4 print:w-5 print:h-5"
                   />
                   <span>
-                    Юридическая история участка чиста (нет спорных сделок)
+                    Юридическая история участка чиста (нет
+                    спорных сделок)
                   </span>
                 </label>
               </div>
@@ -1857,7 +1958,7 @@ export default function ArticleGuide() {
         {/* Footer */}
         <footer className="mt-16 pt-8 border-t-2 border-slate-900 text-center print:break-inside-avoid">
           <p className="text-xl font-semibold text-slate-900 mb-2">
-            zemscan.ru — прозрачность земельных торгов
+            zemscan.ru — прозрачность земельных сделок
           </p>
           <p className="text-sm text-slate-500">
             © 2025 zemscan. Все права защищены. Материал носит
@@ -1870,8 +1971,12 @@ export default function ArticleGuide() {
       {/* Print Footer - отображается только при печати */}
       <div className="print-footer">
         <div className="print-footer-content">
-          <span className="print-footer-left">zemscan.ru — мониторинг земельных торгов</span>
-          <span className="print-footer-center">© 2025 zemscan. Все права защищены.</span>
+          <span className="print-footer-left">
+            zemscan.ru — прозрачность земельных сделок
+          </span>
+          <span className="print-footer-center">
+            © 2025 zemscan. Все права защищены.
+          </span>
           <span className="print-footer-right"></span>
         </div>
       </div>
@@ -1891,15 +1996,13 @@ export default function ArticleGuide() {
             
             @top-center {
               content: element(running-header);
-              font-size: 10pt;
-              color: #475569;
               vertical-align: bottom;
               padding-bottom: 3mm;
               border-bottom: 1pt solid #cbd5e1;
             }
             
             @bottom-left {
-              content: "zemscan.ru — мониторинг земельных торгов | © 2025";
+              content: "zemscan.ru — прозрачность земельных сделок | © 2025";
               font-size: 9pt;
               color: #64748b;
               font-weight: 500;
@@ -1932,12 +2035,22 @@ export default function ArticleGuide() {
           }
           
           .running-header {
-            position: running(running-header);
-            font-size: 10pt;
-            color: #475569;
+            display: block !important;
+            font-size: 9pt;
+            color: #64748b;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5pt;
+            text-align: center;
+            padding: 8pt 0;
+            margin: 0pt 0 10pt 0;
+            border-top: 1pt solid #e2e8f0;
+            border-bottom: 1pt solid #e2e8f0;
+            page-break-after: avoid;
+          }
+          
+          section > .running-header:first-child {
+            display: none !important;
           }
 
           .print\\:page-break-before {
