@@ -1414,7 +1414,7 @@ export default function ArticleGuide() {
                     2–4 недели
                   </td>
                   <td className="border border-slate-300 px-4 py-2">
-                    350–5 000 ₽
+                    580-2950 ₽
                   </td>
                 </tr>
                 <tr className="bg-slate-50">
@@ -1425,7 +1425,7 @@ export default function ArticleGuide() {
                     1–2 недели
                   </td>
                   <td className="border border-slate-300 px-4 py-2">
-                    350–870 ₽
+                    580–920 ₽
                   </td>
                 </tr>
                 <tr>
@@ -1436,7 +1436,7 @@ export default function ArticleGuide() {
                     2–4 недели
                   </td>
                   <td className="border border-slate-300 px-4 py-2">
-                    0–1 000 ₽
+                    0 ₽
                   </td>
                 </tr>
                 <tr className="bg-slate-50">
@@ -1447,7 +1447,7 @@ export default function ArticleGuide() {
                     1–2 недели
                   </td>
                   <td className="border border-slate-300 px-4 py-2">
-                    5 000–15 000 ₽
+                    0–15 000 ₽
                   </td>
                 </tr>
                 <tr>
@@ -1458,7 +1458,7 @@ export default function ArticleGuide() {
                     3–7 дней
                   </td>
                   <td className="border border-slate-300 px-4 py-2">
-                    350–870 ₽
+                    580-2950 ₽
                   </td>
                 </tr>
                 <tr className="bg-slate-50">
@@ -1488,10 +1488,10 @@ export default function ArticleGuide() {
                     ИТОГО
                   </td>
                   <td className="border border-slate-400 px-4 py-3">
-                    6–12 недель
+                    3–6 недель
                   </td>
                   <td className="border border-slate-400 px-4 py-3">
-                    6 000–40 000 ₽
+                    до 40 000 ₽
                   </td>
                 </tr>
               </tbody>
@@ -1635,7 +1635,7 @@ export default function ArticleGuide() {
               </ul>
               <p className="text-blue-600 font-semibold mt-2 text-sm">
                 Вы получаете: полную картину за 5 минут вместо
-                6–12 недель
+                нескольких недель
               </p>
             </div>
           </div>
