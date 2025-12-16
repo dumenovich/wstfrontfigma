@@ -210,6 +210,19 @@ export default function ArticleGuide() {
             </ul>
           </div>
 
+          <div className="rounded-lg overflow-hidden border border-slate-200 shadow-sm">
+            <img
+              src="https://elmarts.ru/upload/iblock/5a8/qkx00wv01fzv2u53noavwcozjwemf45u.jpg"
+              alt="Охранные зоны — территории с ограничениями на
+              строительство и использование"
+              className="w-full h-56 object-cover"
+            />
+          </div>
+          <p className="text-center text-sm text-slate-500 mt-3 italic">
+            Охранные зоны — территории с ограничениями на
+            строительство и использование
+          </p>
+
           <div className="bg-slate-50 rounded-lg p-6 print:break-inside-avoid">
             <div className="running-header">
               Риск 1: Участок в охранной зоне
@@ -393,6 +406,17 @@ export default function ArticleGuide() {
               </li>
             </ul>
           </div>
+
+          <div className="rounded-lg overflow-hidden border border-slate-200 shadow-sm">
+            <img
+              src="https://i.postimg.cc/x1M3X4nG/6936852c12abe62f266a3d26-original.webp"
+              alt="Не на каждом участке можно строить дом"
+              className="w-full h-56 object-cover"
+            />
+          </div>
+          <p className="text-center text-sm text-slate-500 mt-3 italic">
+            Не на каждом участке можно строить дом
+          </p>
 
           <div className="bg-slate-50 rounded-lg p-6 print:break-inside-avoid">
             <div className="running-header">
@@ -740,6 +764,19 @@ export default function ArticleGuide() {
             </ul>
           </div>
 
+          <div className="rounded-lg overflow-hidden border border-slate-200 shadow-sm">
+            <img
+              src="https://zemexx.ru/upload/dev2fun.imagecompress/webp/resize_cache/iblock/297/1025_460_240cd750bba9870f18aada2478b24840a/spor.webp"
+              alt="Проверка границ и кадастровых данных — критически
+            важный этап"
+              className="w-full h-56 object-cover"
+            />
+          </div>
+          <p className="text-center text-sm text-slate-500 mt-3 italic">
+            Проверка границ и кадастровых данных — критически
+            важный этап
+          </p>
+
           <div className="bg-slate-50 rounded-lg p-6 print:break-inside-avoid">
             <div className="running-header">
               Риск 4: Проблемы с границами и соседями
@@ -817,21 +854,6 @@ export default function ArticleGuide() {
             </div>
           </div>
         </section>
-
-        {/* Illustration 2: Map */}
-        <div className="mb-12 print:break-inside-avoid">
-          <div className="rounded-lg overflow-hidden border border-slate-200 shadow-sm">
-            <img
-              src="https://www.esri-cis.com/content/dam/distributor-share/esri-cis-ru/home/arcgis/products/topomaps/topomap-100k-s3.png"
-              alt="Кадастровая карта и границы участка"
-              className="w-full h-56 object-cover"
-            />
-          </div>
-          <p className="text-center text-sm text-slate-500 mt-3 italic">
-            Проверка границ и кадастровых данных — критически
-            важный этап
-          </p>
-        </div>
 
         {/* Risk 5 */}
         <section className="mb-12 print:mb-8 print:page-break-before">
@@ -1014,6 +1036,18 @@ export default function ArticleGuide() {
             </ul>
           </div>
 
+          <div className="rounded-lg overflow-hidden border border-slate-200 shadow-sm">
+            <img
+              src="https://cdn.iz.ru/sites/default/files/styles/1920x1080/public/article-2023-08/2_1_0.jpg?itok=v-xOpdNC"
+              alt="Заниженанная стоимость участка говорит о возможных проблемах"
+              className="w-full h-56 object-cover"
+            />
+          </div>
+          <p className="text-center text-sm text-slate-500 mt-3 italic">
+            Заниженанная стоимость участка говорит о возможных
+            проблемах
+          </p>
+
           <div className="bg-slate-50 rounded-lg p-6 print:break-inside-avoid">
             <div className="running-header">
               Риск 6: Низкая ликвидность и реальная рыночная
@@ -1126,6 +1160,20 @@ export default function ArticleGuide() {
                 • Вернуть деньги после торгов почти невозможно
               </li>
             </ul>
+          </div>
+
+          <div className="mb-12 print:break-inside-avoid">
+            <div className="rounded-lg overflow-hidden border border-slate-200 shadow-sm">
+              <img
+                src="https://www.unicraft.org/wp-content/uploads/2023/05/closeup-woman-using-diary-scheduling.jpg"
+                alt="Планирование и проверка перед покупкой"
+                className="w-full h-56 object-cover"
+              />
+            </div>
+            <p className="text-center text-sm text-slate-500 mt-3 italic">
+              Систематический подход к проверке — залог успешной
+              сделки
+            </p>
           </div>
 
           <div className="bg-slate-50 rounded-lg p-6 print:break-inside-avoid">
@@ -1618,43 +1666,8 @@ export default function ArticleGuide() {
                 Вы экономите: 2–4 недели на запросы техусловий
               </p>
             </div>
-
-            <div className="border-l-4 border-blue-600 pl-6 print:break-inside-avoid">
-              <h3 className="font-semibold text-slate-900 mb-2">
-                ✅ Единый отчёт по лоту
-              </h3>
-              <ul className="space-y-1 text-slate-700 text-sm ml-4">
-                <li>• Все проверки в одном документе</li>
-                <li>
-                  • Понятные рекомендации: покупать / не
-                  покупать
-                </li>
-                <li>
-                  • Список оставшихся вопросов для уточнения
-                </li>
-              </ul>
-              <p className="text-blue-600 font-semibold mt-2 text-sm">
-                Вы получаете: полную картину за 5 минут вместо
-                нескольких недель
-              </p>
-            </div>
           </div>
         </section>
-
-        {/* Illustration 3: Checklist */}
-        <div className="mb-12 print:break-inside-avoid">
-          <div className="rounded-lg overflow-hidden border border-slate-200 shadow-sm">
-            <img
-              src="https://www.unicraft.org/wp-content/uploads/2023/05/closeup-woman-using-diary-scheduling.jpg"
-              alt="Планирование и проверка перед покупкой"
-              className="w-full h-56 object-cover"
-            />
-          </div>
-          <p className="text-center text-sm text-slate-500 mt-3 italic">
-            Систематический подход к проверке — залог успешной
-            сделки
-          </p>
-        </div>
 
         {/* Checklist */}
         <section className="mb-12 print:mb-8 print:page-break-before">
