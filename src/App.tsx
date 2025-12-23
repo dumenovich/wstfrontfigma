@@ -29,7 +29,7 @@ import EmailPreview from "./components/EmailPreview";
 import ThankYou from "./components/ThankYou";
 import ArticleGuide from "./components/ArticleGuide";
 import Unsubscribed from "./components/Unsubscribed";
-import BlogDesignPreview from "./components/BlogDesignPreview";
+import Blog from "./components/Blog";
 import HeaderVariantsPreview from "./components/HeaderVariantsPreview";
 
 export default function App() {
@@ -95,7 +95,7 @@ export default function App() {
 
   // Показываем Blog Design Preview
   if (showBlogPreview) {
-    return <BlogDesignPreview onBack={() => setShowBlogPreview(false)} />;
+    return <Blog onBack={() => setShowBlogPreview(false)} />;
   }
 
   // Показываем Header Variants Preview
@@ -255,7 +255,7 @@ export default function App() {
               Автоматический мониторинг аукционных лотов, оценка
               рыночной стоимости и уведомления — будут доступны
               с первого дня. ROI-анлз, проверка рисков и
-              персональные рекомендации — подключим поэтапно, в
+              персональные рекомендации — подклю��им поэтапно, в
               течение ближайших 2–3 месяцев.
             </p>
 
@@ -421,7 +421,7 @@ export default function App() {
 
             <div className="text-center mb-12">
               <h2 className="mb-4 text-white">
-                Что будет доступно с перого дня
+                Что будет доступно с пе��ого дня
               </h2>
             </div>
 
@@ -592,7 +592,7 @@ export default function App() {
                       Потенциал застройки
                     </h4>
                     <p className="text-blue-200">
-                      Анализируем ПЗЗ: макс. площаь, этажность,
+                      Анализируем ПЗЗ: макс. площаь, эт��жность,
                       плотность
                     </p>
                   </div>
