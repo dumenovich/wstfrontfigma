@@ -1,22 +1,20 @@
+import { useState } from "react";
+import { Input } from "./components/ui/input";
+import { Button } from "./components/ui/button";
+import { Card } from "./components/ui/card";
+import { Badge } from "./components/ui/badge";
 import {
   CheckCircle2,
-  MapPin,
-  Zap,
-  Database,
-  TrendingUp,
-  BarChart3,
-  Bell,
-  FileSearch,
-  Shapes,
-  Building2,
-  DollarSign,
-  AlertTriangle,
-  Ruler,
-  Home,
-  Search,
-  Shield,
   Sparkles,
   Rocket,
+  TrendingUp,
+  Building2,
+  DollarSign,
+  Home,
+  AlertTriangle,
+  Shapes,
+  Shield,
+  BookOpen,
 } from "lucide-react";
 import {
   LogoVariant1,
@@ -27,14 +25,12 @@ import {
   LogoVariant6,
 } from "./components/LogoVariants";
 import { FaviconPreview } from "./components/FaviconPreview";
-import { useState } from "react";
-import { Card } from "./components/ui/card";
-import { Input } from "./components/ui/input";
-import { Button } from "./components/ui/button";
-import { Badge } from "./components/ui/badge";
-import ThankYou from "./components/ThankYou";
 import EmailPreview from "./components/EmailPreview";
+import ThankYou from "./components/ThankYou";
 import ArticleGuide from "./components/ArticleGuide";
+import Unsubscribed from "./components/Unsubscribed";
+import BlogDesignPreview from "./components/BlogDesignPreview";
+import HeaderVariantsPreview from "./components/HeaderVariantsPreview";
 
 export default function App() {
   const [email, setEmail] = useState("");
@@ -47,6 +43,11 @@ export default function App() {
   const [showThankYou, setShowThankYou] = useState(false);
   const [showEmailPreview, setShowEmailPreview] = useState(false);
   const [showArticleGuide, setShowArticleGuide] = useState(false);
+  const [showUnsubscribed, setShowUnsubscribed] = useState(false);
+  const [unsubscribedStatus, setUnsubscribedStatus] = useState<string>("success");
+  const [showBlogPreview, setShowBlogPreview] = useState(false);
+  const [showHeaderVariants, setShowHeaderVariants] = useState(false);
+  const [headerVariant, setHeaderVariant] = useState(1); // По умолчанию вариант 1
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,6 +61,7 @@ export default function App() {
     setShowThankYou(false);
     setIsSubscribed(false);
     setEmail("");
+    setShowUnsubscribed(false);
   };
 
   const LogoComponent = [
@@ -86,6 +88,29 @@ export default function App() {
     return <ThankYou email={email} onBack={handleBackToHome} />;
   }
 
+  // Показываем Unsubscribed страницу
+  if (showUnsubscribed) {
+    return <Unsubscribed previewStatus={unsubscribedStatus} onBack={handleBackToHome} />;
+  }
+
+  // Показываем Blog Design Preview
+  if (showBlogPreview) {
+    return <BlogDesignPreview onBack={() => setShowBlogPreview(false)} />;
+  }
+
+  // Показываем Header Variants Preview
+  if (showHeaderVariants) {
+    return (
+      <HeaderVariantsPreview
+        onBack={() => setShowHeaderVariants(false)}
+        onSelectVariant={(variant) => {
+          setHeaderVariant(variant);
+          setShowHeaderVariants(false);
+        }}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950">
       {/* Grid Pattern Background */}
@@ -108,10 +133,28 @@ export default function App() {
       {/* Header */}
       <header className="relative z-10 border-b border-white/10 bg-white/5 backdrop-blur-lg">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <LogoComponent className="w-8 h-8" />
-            <span className="text-white">zemscan.ru</span>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2">
+              <LogoComponent className="w-8 h-8" />
+              <span className="text-white">zemscan.ru</span>
+            </div>
+            
+            <div className="h-8 w-px bg-white/10" />
+            
+            <nav className="hidden md:flex items-center gap-4">
+              <a href="#" className="text-cyan-400 hover:text-cyan-300 transition-colors">
+                Главная
+              </a>
+              <span className="text-white/20">•</span>
+              <button
+                onClick={() => setShowBlogPreview(true)}
+                className="text-slate-300 hover:text-white transition-colors"
+              >
+                Блог
+              </button>
+            </nav>
           </div>
+
           <div className="flex items-center gap-6">
             <div className="hidden md:flex flex-col items-end gap-0.5">
               <span className="text-blue-400/70 text-xs">
@@ -249,7 +292,7 @@ export default function App() {
                     </form>
                     
                     <p className="text-blue-300/70 text-sm mt-4">
-                      + PDF-гайд по выбору участков сразу после подписки
+                      + PDF-гайд по выбору участков сразу поле подписки
                     </p>
                   </div>
                 </div>
@@ -351,11 +394,11 @@ export default function App() {
                       </div>
                       <div className="flex items-start gap-2">
                         <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                        <p className="text-blue-200/80 text-sm">1-2 полезных письма до запуска</p>
+                        <p className="text-blue-200/80 text-sm">1-2 полезных письма до запска</p>
                       </div>
                       <div className="flex items-start gap-2">
                         <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                        <p className="text-blue-200/80 text-sm">Легко отписаться — в один клик</p>
+                        <p className="text-blue-200/80 text-sm">Легко отписаться —  один клик</p>
                       </div>
                     </div>
                   </div>
@@ -378,7 +421,7 @@ export default function App() {
 
             <div className="text-center mb-12">
               <h2 className="mb-4 text-white">
-                Что будет доступно с первого дня
+                Что будет доступно с перого дня
               </h2>
             </div>
 
@@ -449,7 +492,7 @@ export default function App() {
                     </h4>
                     <p className="text-blue-200/90">
                       Фильтры по региону, назначению, площади —
-                      сохраняются между сессиями. Начните с
+                      сохраняются между ессиями. Начните с
                       того, что важно именно вам.
                     </p>
                   </div>
@@ -462,7 +505,7 @@ export default function App() {
           <div className="mb-20 max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="mb-4 text-white">
-                Как мы оцениваем участок
+                Ка мы оцениваем участок
               </h2>
               <p className="text-blue-300">
                 Наша модель учитывает более 15 факторов — чтобы
@@ -498,7 +541,7 @@ export default function App() {
                       Инфаструктура
                     </h4>
                     <p className="text-blue-200">
-                      наличие газа, воды, расстояние до столбов
+                      налчие газа, воды, расстояние до столбов
                       ЛЭП, транспортная доступность, социальные
                       объекты в радиусе
                     </p>
@@ -549,7 +592,7 @@ export default function App() {
                       Потенциал застройки
                     </h4>
                     <p className="text-blue-200">
-                      Анализируем ПЗЗ: макс. площадь, этажность,
+                      Анализируем ПЗЗ: макс. площаь, этажность,
                       плотность
                     </p>
                   </div>
@@ -564,7 +607,7 @@ export default function App() {
                   <div>
                     <h4 className="text-white mb-2">Риски</h4>
                     <p className="text-blue-200">
-                      Сервитут, ЗОУИТ, геология, риски
+                      Серитут, ЗОУИТ, геология, риски
                       подтопление, неблагоприятная экология
                     </p>
                   </div>
@@ -601,7 +644,7 @@ export default function App() {
                     </h4>
                     <p className="text-blue-200/90">
                       Расчёт срока окупаемости и инвестиционного
-                      потенциала
+                      потенциаа
                     </p>
                   </div>
                 </div>
@@ -618,7 +661,7 @@ export default function App() {
                   </div>
                   <div>
                     <h4 className="text-white mb-2">
-                      Глубокая проверка рисков
+                      Глубока проверка рисков
                     </h4>
                     <p className="text-blue-200/90">
                       Проверка по нескольким категориям:
@@ -747,6 +790,13 @@ export default function App() {
             {/* Center - Email Preview Link */}
             <div className="flex items-center gap-3">
               <button
+                onClick={() => setShowHeaderVariants(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-blue-300 hover:bg-white/10 hover:border-cyan-500/30 transition-all group"
+              >
+                <span className="text-sm">🎨 Header варианты</span>
+              </button>
+              
+              <button
                 onClick={() => setShowArticleGuide(true)}
                 className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-blue-300 hover:bg-white/10 hover:border-cyan-500/30 transition-all group"
               >
@@ -759,6 +809,66 @@ export default function App() {
               >
                 <span className="text-sm">📧 Email-шаблон</span>
               </button>
+              
+              {/* Выпадающее меню для тестирования статусов отписки */}
+              <div className="relative group/unsub">
+                <button
+                  className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-blue-300 hover:bg-white/10 hover:border-cyan-500/30 transition-all"
+                >
+                  <span className="text-sm">🚫 Отписка</span>
+                </button>
+                
+                {/* Dropdown */}
+                <div className="absolute bottom-full mb-2 right-0 w-48 bg-slate-900/95 backdrop-blur-xl border border-white/20 rounded-lg shadow-xl opacity-0 invisible group-hover/unsub:opacity-100 group-hover/unsub:visible transition-all">
+                  <div className="p-2 space-y-1">
+                    <button
+                      onClick={() => {
+                        setUnsubscribedStatus('success');
+                        setShowUnsubscribed(true);
+                      }}
+                      className="w-full text-left px-3 py-2 text-sm text-green-300 hover:bg-white/10 rounded transition-colors"
+                    >
+                      ✅ Успешно
+                    </button>
+                    <button
+                      onClick={() => {
+                        setUnsubscribedStatus('already');
+                        setShowUnsubscribed(true);
+                      }}
+                      className="w-full text-left px-3 py-2 text-sm text-blue-300 hover:bg-white/10 rounded transition-colors"
+                    >
+                      ℹ️ Уже отписан
+                    </button>
+                    <button
+                      onClick={() => {
+                        setUnsubscribedStatus('not_found');
+                        setShowUnsubscribed(true);
+                      }}
+                      className="w-full text-left px-3 py-2 text-sm text-yellow-300 hover:bg-white/10 rounded transition-colors"
+                    >
+                      ❓ Не найден
+                    </button>
+                    <button
+                      onClick={() => {
+                        setUnsubscribedStatus('invalid');
+                        setShowUnsubscribed(true);
+                      }}
+                      className="w-full text-left px-3 py-2 text-sm text-orange-300 hover:bg-white/10 rounded transition-colors"
+                    >
+                      ⚠️ Неверная ссылка
+                    </button>
+                    <button
+                      onClick={() => {
+                        setUnsubscribedStatus('error');
+                        setShowUnsubscribed(true);
+                      }}
+                      className="w-full text-left px-3 py-2 text-sm text-red-300 hover:bg-white/10 rounded transition-colors"
+                    >
+                      ❌ Ошибка
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Right - Year */}
