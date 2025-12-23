@@ -229,10 +229,10 @@ export default function Blog({ onBack }: BlogProps) {
         <div className="max-w-7xl mx-auto px-6">
           {/* Page Title */}
           <div className="mb-12 max-w-3xl">
-            <h1 className="text-white mb-4">
+            <h1 className="text-white mb-6 text-4xl md:text-5xl">
               Журнал о земельных торгах
             </h1>
-            <p className="text-blue-200/80 text-lg">
+            <p className="text-blue-200/90 text-xl leading-relaxed">
               Гайды, аналитика, кейсы и практические советы по
               покупке земельных участков на аукционах
             </p>

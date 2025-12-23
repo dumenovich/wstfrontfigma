@@ -39,7 +39,7 @@ export function BlogCard({ post, categoryInfo }: BlogCardProps) {
           </Badge>
 
           {/* Title */}
-          <h3 className="text-white mb-3 group-hover:text-cyan-400 transition-colors text-xl font-bold leading-snug">
+          <h3 className="text-white mb-3 group-hover:text-cyan-400 transition-colors text-lg font-bold leading-snug">
             {post.title}
           </h3>
 
