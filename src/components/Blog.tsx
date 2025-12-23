@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react';
-import { ArrowLeft, Loader2 } from 'lucide-react';
-import { BlogManifest } from '@/types/blog';
-import { BlogCard, BlogFeatured } from '@/components/blog';
-import { LogoVariant2 } from '@/components/LogoVariants';
-import { Badge } from '@/components/ui/badge';
+import { useState, useEffect } from "react";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import { BlogManifest } from "@/types/blog";
+import { BlogCard, BlogFeatured } from "@/components/blog";
+import { LogoVariant2 } from "@/components/LogoVariants";
+import { Badge } from "@/components/ui/badge";
 
 interface BlogProps {
   onBack: () => void;
 }
 
 export default function Blog({ onBack }: BlogProps) {
-  const [manifest, setManifest] = useState<BlogManifest | null>(null);
+  const [manifest, setManifest] = useState<BlogManifest | null>(
+    null,
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,86 +23,101 @@ export default function Blog({ onBack }: BlogProps) {
         risks: {
           name: "Риски",
           icon: "⚠️",
-          color: "#ef4444"
+          color: "#ef4444",
         },
         guides: {
           name: "Гайды",
           icon: "📘",
-          color: "#3b82f6"
+          color: "#3b82f6",
         },
         analytics: {
           name: "Аналитика",
           icon: "📊",
-          color: "#8b5cf6"
+          color: "#8b5cf6",
         },
         cases: {
           name: "Кейсы",
           icon: "💼",
-          color: "#10b981"
+          color: "#10b981",
         },
         legal: {
           name: "Право",
           icon: "⚖️",
-          color: "#f59e0b"
-        }
+          color: "#f59e0b",
+        },
       },
       posts: [
         {
           slug: "7-hidden-risks",
           title: "7 скрытых рисков при покупке земли на торгах",
-          description: "Подробный разбор самых частых ошибок покупателей земельных участков на аукционах. Узнайте, как избежать потери денег и времени.",
+          description:
+            "Подробный разбор самых частых ошибок покупателей земельных участков на аукционах. Узнайте, как избежать потери денег и времени.",
           category: "risks",
           publishedAt: "2024-12-20",
           readTime: "12 мин",
           featured: true,
-          image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=60"
+          image:
+            "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=60",
         },
         {
           slug: "how-to-choose-land",
-          title: "Как выбрать земельный участок: пошаговая инструкция",
-          description: "Практическое руководство по выбору участка под застройку. Критерии оценки, чек-листы и реальные примеры.",
+          title:
+            "Как выбрать земельный участок: пошаговая инструкция",
+          description:
+            "Практическое руководство по выбору участка под застройку. Критерии оценки, чек-листы и реальные примеры.",
           category: "guides",
           publishedAt: "2024-12-18",
           readTime: "15 мин",
-          image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=60"
+          image:
+            "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=60",
         },
         {
           slug: "market-analysis-2024",
           title: "Анализ рынка земельных торгов 2024",
-          description: "Статистика продаж, динамика цен, прогнозы экспертов. Полный обзор рынка земельных участков по регионам России.",
+          description:
+            "Статистика продаж, динамика цен, прогнозы экспертов. Полный обзор рынка земельных участков по регионам России.",
           category: "analytics",
           publishedAt: "2024-12-15",
           readTime: "10 мин",
-          image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=60"
+          image:
+            "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=60",
         },
         {
           slug: "case-moscow-region",
-          title: "Кейс: покупка участка в Подмосковье с ROI 45%",
-          description: "Реальная история успешной сделки. От поиска лота до продажи с прибылью. Детальный разбор стратегии.",
+          title:
+            "Кейс: покупка участка в Подмосковье с ROI 45%",
+          description:
+            "Реальная история успешной сделки. От поиска лота до продажи с прибылью. Детальный разбор стратегии.",
           category: "cases",
           publishedAt: "2024-12-12",
           readTime: "8 мин",
-          image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&auto=format&fit=crop&q=60"
+          image:
+            "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&auto=format&fit=crop&q=60",
         },
         {
           slug: "legal-restrictions",
-          title: "Юридические ограничения: ЗОУИТ, сервитуты, обременения",
-          description: "Разбираемся в правовых нюансах: что такое зоны с особыми условиями использования территорий и как они влияют на стоимость.",
+          title:
+            "Юридические ограничения: ЗОУИТ, сервитуты, обременения",
+          description:
+            "Разбираемся в правовых нюансах: что такое зоны с особыми условиями использования территорий и как они влияют на стоимость.",
           category: "legal",
           publishedAt: "2024-12-10",
           readTime: "14 мин",
-          image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=60"
+          image:
+            "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=60",
         },
         {
           slug: "infrastructure-checklist",
           title: "Чек-лист проверки инфраструктуры участка",
-          description: "Что проверить перед покупкой: газ, вода, электричество, дороги. Готовый список для самостоятельной оценки.",
+          description:
+            "Что проверить перед покупкой: газ, вода, электричество, дороги. Готовый список для самостоятельной оценки.",
           category: "guides",
           publishedAt: "2024-12-08",
           readTime: "7 мин",
-          image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop&q=60"
-        }
-      ]
+          image:
+            "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop&q=60",
+        },
+      ],
     };
 
     // Имитация загрузки
@@ -110,9 +127,10 @@ export default function Blog({ onBack }: BlogProps) {
     }, 500);
 
     // Попытка загрузить реальные данные (опционально)
-    fetch('/blog/manifest.json')
+    fetch("/blog/manifest.json")
       .then((res) => {
-        if (!res.ok) throw new Error('Используются mock-данные');
+        if (!res.ok)
+          throw new Error("Используются mock-данные");
         return res.json();
       })
       .then((data: BlogManifest) => {
@@ -125,12 +143,14 @@ export default function Blog({ onBack }: BlogProps) {
   }, []);
 
   // Сортировка: сначала featured, потом по дате
-  const sortedPosts = manifest?.posts
-    .slice()
-    .sort((a, b) => {
+  const sortedPosts =
+    manifest?.posts.slice().sort((a, b) => {
       if (a.featured && !b.featured) return -1;
       if (!a.featured && b.featured) return 1;
-      return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+      return (
+        new Date(b.publishedAt).getTime() -
+        new Date(a.publishedAt).getTime()
+      );
     }) || [];
 
   const featuredPost = sortedPosts.find((p) => p.featured);
@@ -145,7 +165,7 @@ export default function Blog({ onBack }: BlogProps) {
           style={{
             backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
                              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px',
+            backgroundSize: "50px 50px",
           }}
         />
       </div>
@@ -162,21 +182,25 @@ export default function Blog({ onBack }: BlogProps) {
       <header className="relative z-10 border-b border-white/10 bg-white/5 backdrop-blur-lg">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
-            <button onClick={onBack} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <button
+              onClick={onBack}
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            >
               <LogoVariant2 className="w-8 h-8" />
               <span className="text-white">zemscan.ru</span>
             </button>
-            
+
             <div className="h-8 w-px bg-white/10" />
-            
+
             <nav className="hidden md:flex items-center gap-4">
-              <button onClick={onBack} className="text-slate-300 hover:text-white transition-colors">
+              <button
+                onClick={onBack}
+                className="text-slate-300 hover:text-white transition-colors"
+              >
                 Главная
               </button>
               <span className="text-white/20">•</span>
-              <span className="text-cyan-400">
-                Блог
-              </span>
+              <span className="text-cyan-400">Блог</span>
             </nav>
           </div>
 
@@ -205,16 +229,12 @@ export default function Blog({ onBack }: BlogProps) {
         <div className="max-w-7xl mx-auto px-6">
           {/* Page Title */}
           <div className="mb-12 max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full mb-6">
-              <span className="text-cyan-400">📖</span>
-              <span className="text-cyan-300 text-sm">Образовательный контент</span>
-            </div>
-            
             <h1 className="text-white mb-4">
-              Блог о земельных торгах
+              Журнал о земельных торгах
             </h1>
             <p className="text-blue-200/80 text-lg">
-              Гайды, аналитика, кейсы и практические советы по покупке земельных участков на аукционах
+              Гайды, аналитика, кейсы и практические советы по
+              покупке земельных участков на аукционах
             </p>
           </div>
 
@@ -222,7 +242,9 @@ export default function Blog({ onBack }: BlogProps) {
           {loading && (
             <div className="flex flex-col items-center justify-center py-32">
               <Loader2 className="w-10 h-10 text-cyan-400 animate-spin mb-4" />
-              <p className="text-blue-300/60">Загрузка статей...</p>
+              <p className="text-blue-300/60">
+                Загрузка статей...
+              </p>
             </div>
           )}
 
@@ -230,7 +252,9 @@ export default function Blog({ onBack }: BlogProps) {
           {error && (
             <div className="bg-gradient-to-br from-red-500/10 to-red-600/10 border border-red-500/30 rounded-xl p-8 text-center backdrop-blur-md">
               <div className="text-5xl mb-4">⚠️</div>
-              <h3 className="text-red-300 text-xl mb-2">Ошибка загрузки</h3>
+              <h3 className="text-red-300 text-xl mb-2">
+                Ошибка загрузки
+              </h3>
               <p className="text-red-300/70">{error}</p>
             </div>
           )}
@@ -243,7 +267,9 @@ export default function Blog({ onBack }: BlogProps) {
                 <div className="mb-16">
                   <BlogFeatured
                     post={featuredPost}
-                    categoryInfo={manifest.categories[featuredPost.category]}
+                    categoryInfo={
+                      manifest.categories[featuredPost.category]
+                    }
                   />
                 </div>
               )}
@@ -254,7 +280,14 @@ export default function Blog({ onBack }: BlogProps) {
                   <div className="flex items-center gap-4 mb-10">
                     <h2 className="text-white">Все статьи</h2>
                     <div className="flex-1 h-px bg-gradient-to-r from-blue-500/30 via-cyan-500/20 to-transparent" />
-                    <span className="text-blue-300/50 text-sm">{otherPosts.length} {otherPosts.length === 1 ? 'статья' : otherPosts.length < 5 ? 'статьи' : 'статей'}</span>
+                    <span className="text-blue-300/50 text-sm">
+                      {otherPosts.length}{" "}
+                      {otherPosts.length === 1
+                        ? "статья"
+                        : otherPosts.length < 5
+                          ? "статьи"
+                          : "статей"}
+                    </span>
                   </div>
 
                   {/* Posts Grid */}
@@ -263,7 +296,9 @@ export default function Blog({ onBack }: BlogProps) {
                       <BlogCard
                         key={post.slug}
                         post={post}
-                        categoryInfo={manifest.categories[post.category]}
+                        categoryInfo={
+                          manifest.categories[post.category]
+                        }
                       />
                     ))}
                   </div>
@@ -273,10 +308,16 @@ export default function Blog({ onBack }: BlogProps) {
               {/* Empty State */}
               {sortedPosts.length === 0 && (
                 <div className="text-center py-32">
-                  <div className="text-7xl mb-6 opacity-20">📝</div>
-                  <h3 className="text-white mb-3">Статьи скоро появятся</h3>
+                  <div className="text-7xl mb-6 opacity-20">
+                    📝
+                  </div>
+                  <h3 className="text-white mb-3">
+                    Статьи скоро появятся
+                  </h3>
                   <p className="text-blue-300/60 max-w-md mx-auto">
-                    Мы работаем над полезным контентом о земельных торгах. Подпишитесь, чтобы не пропустить первые публикации
+                    Мы работаем над полезным контентом о
+                    земельных торгах. Подпишитесь, чтобы не
+                    пропустить первые публикации
                   </p>
                 </div>
               )}
@@ -287,26 +328,30 @@ export default function Blog({ onBack }: BlogProps) {
           <div className="mt-20 relative">
             {/* Glow Background */}
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-cyan-500/10 to-purple-500/10 rounded-3xl blur-2xl" />
-            
+
             <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-10 md:p-14 text-center overflow-hidden">
               {/* Decorative Elements */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-cyan-500/10 to-transparent rounded-full blur-3xl" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-blue-500/10 to-transparent rounded-full blur-3xl" />
-              
+
               <div className="relative">
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/20 border border-purple-400/30 rounded-full mb-6">
                   <span className="text-purple-300">✨</span>
-                  <span className="text-purple-300 text-sm">Полезный контент каждую неделю</span>
+                  <span className="text-purple-300 text-sm">
+                    Полезный контент каждую неделю
+                  </span>
                 </div>
-                
+
                 <h3 className="text-white mb-4">
                   Получайте новые статьи на почту
                 </h3>
                 <p className="text-blue-200/70 mb-8 max-w-2xl mx-auto leading-relaxed">
-                  2 раза в неделю — практические гайды, аналитика рынка и реальные кейсы покупки земли на торгах. 
-                  Никакого спама, только полезная информация.
+                  2 раза в неделю — практические гайды,
+                  аналитика рынка и реальные кейсы покупки земли
+                  на торгах. Никакого спама, только полезная
+                  информация.
                 </p>
-                
+
                 <button
                   onClick={onBack}
                   className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-medium rounded-xl shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 transition-all hover:scale-105"
@@ -314,9 +359,10 @@ export default function Blog({ onBack }: BlogProps) {
                   Подписаться на рассылку
                   <ArrowLeft className="w-5 h-5 rotate-180" />
                 </button>
-                
+
                 <p className="text-blue-300/50 text-sm mt-6">
-                  + Бонус: PDF-гайд «7 скрытых рисков при покупке земли на торгах» сразу после подписки
+                  + Бонус: PDF-гайд «7 скрытых рисков при
+                  покупке земли на торгах» сразу после подписки
                 </p>
               </div>
             </div>
@@ -355,7 +401,9 @@ export default function Blog({ onBack }: BlogProps) {
                 На главную
               </button>
               <div className="h-6 w-px bg-white/20" />
-              <div className="text-blue-400/60 text-sm">© 2025</div>
+              <div className="text-blue-400/60 text-sm">
+                © 2025
+              </div>
             </div>
           </div>
         </div>

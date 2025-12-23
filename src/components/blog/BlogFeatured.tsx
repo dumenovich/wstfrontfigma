@@ -54,7 +54,7 @@ export function BlogFeatured({ post, categoryInfo }: BlogFeaturedProps) {
             </Badge>
 
             {/* Title */}
-            <h2 className="text-white mb-4 group-hover:text-cyan-400 transition-colors text-3xl md:text-4xl font-bold leading-tight">
+            <h2 className="text-white mb-4 group-hover:text-cyan-400 transition-colors text-2xl md:text-3xl font-bold leading-tight">
               {post.title}
             </h2>
 
