@@ -97,7 +97,7 @@ export default function Blog({ onBack }: BlogProps) {
         {
           slug: "legal-restrictions",
           title:
-            "Юридические ограничения: ЗОУИТ, сервитуты, обременения",
+            "Юридические ограничения: ЗОУИТ, сервитуты, обременени",
           description:
             "Разбираемся в правовых нюансах: что такое зоны с особыми условиями использования территорий и как они влияют на стоимость.",
           category: "legal",
@@ -182,13 +182,13 @@ export default function Blog({ onBack }: BlogProps) {
       <header className="relative z-10 border-b border-white/10 bg-white/5 backdrop-blur-lg">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
-            <button
+            <div
               onClick={onBack}
-              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer"
             >
               <LogoVariant2 className="w-8 h-8" />
               <span className="text-white">zemscan.ru</span>
-            </button>
+            </div>
 
             <div className="h-8 w-px bg-white/10" />
 
@@ -230,7 +230,7 @@ export default function Blog({ onBack }: BlogProps) {
           {/* Page Title */}
           <div className="mb-12 max-w-3xl">
             <h1 className="text-white mb-6 text-4xl md:text-5xl">
-              Журнал о земельных торгах
+              урал о земельных торгах
             </h1>
             <p className="text-blue-200/90 text-xl leading-relaxed">
               Гайды, аналитика, кейсы и практические советы по
@@ -372,38 +372,31 @@ export default function Blog({ onBack }: BlogProps) {
 
       {/* Footer */}
       <footer className="relative z-10 py-12 border-t border-white/10 bg-gradient-to-b from-transparent to-slate-900/50 mt-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            {/* Left - Logo and Description */}
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3 group">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full group-hover:bg-cyan-500/30 transition-all" />
-                  <LogoVariant2 className="w-9 h-9 relative z-10" />
-                </div>
-                <div className="text-white">zemscan.ru</div>
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+          {/* Left - Logo and Description */}
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2">
+              <div className="relative">
+                <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full group-hover:bg-cyan-500/30 transition-all" />
+                <LogoVariant2 className="w-8 h-8 relative z-10" />
               </div>
 
-              <div className="hidden md:block h-8 w-px bg-white/20" />
-
-              <p className="text-blue-100/70 hidden md:block">
-                Аналитика земельного рынка
-              </p>
+              <div className="text-white text-base leading-none">
+                zemscan.ru
+              </div>
             </div>
 
-            {/* Right - Year and Back Link */}
-            <div className="flex items-center gap-6">
-              <button
-                onClick={onBack}
-                className="flex items-center gap-2 text-blue-300/70 hover:text-cyan-400 transition-colors text-sm"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                На главную
-              </button>
-              <div className="h-6 w-px bg-white/20" />
-              <div className="text-blue-400/60 text-sm">
-                © 2025
-              </div>
+            <div className="hidden md:block h-8 w-px bg-white/20" />
+
+            <p className="text-blue-300/80 hidden md:block text-sm leading-none">
+              Аналитика земельного рынка
+            </p>
+          </div>
+
+          {/* Right - Year */}
+          <div className="flex items-center gap-6">
+            <div className="text-blue-400/60 text-sm">
+              © 2025, Wasteland Tech
             </div>
           </div>
         </div>
