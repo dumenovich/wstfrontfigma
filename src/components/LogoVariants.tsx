@@ -28,8 +28,8 @@ export function LogoVariant2({ className = "w-8 h-8" }: { className?: string }) 
     <svg className={className} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#3B82F6" />
-          <stop offset="100%" stopColor="#06B6D4" />
+          <stop offset="0%" stopColor="#2e5947" />
+          <stop offset="100%" stopColor="#3d7659" />
         </linearGradient>
       </defs>
       {/* Участки */}
@@ -38,7 +38,7 @@ export function LogoVariant2({ className = "w-8 h-8" }: { className?: string }) 
       <rect x="4" y="16" width="8" height="12" fill="url(#grad2)" opacity="0.6" rx="1" />
       <rect x="14" y="14" width="14" height="14" fill="url(#grad2)" opacity="0.8" rx="1" />
       {/* Сканирующая линия */}
-      <line x1="2" y1="24" x2="30" y2="8" stroke="#06B6D4" strokeWidth="2" opacity="0.8" strokeLinecap="round" />
+      <line x1="2" y1="24" x2="30" y2="8" stroke="#2e5947" strokeWidth="2" opacity="0.8" strokeLinecap="round" />
     </svg>
   );
 }
