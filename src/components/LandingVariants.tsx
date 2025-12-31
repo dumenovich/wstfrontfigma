@@ -9,6 +9,7 @@ import {
   Sun,
   Moon,
   MapPin,
+  Send,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -109,7 +110,7 @@ export default function LandingVariants({
 
   const faqs = [
     {
-      question: "Как ZemScan помогает найти земельные участки?",
+      question: "Как ZemScan помогает нйти земельные участки?",
       answer:
         "ZemScan автоматически мониторит все публичные источники данных о лотах аренды земельных участков, фильтрует их по вашим критериям и отправляет уведомления о новых возможностях.",
     },
@@ -127,7 +128,7 @@ export default function LandingVariants({
     {
       question: "Сколько стоит подписка на ZemScan?",
       answer:
-        "Мы предлагаем гибкие тарифные планы от 2 990 ₽/месяц  индивидуальных пользователей до корпоративных решений. Первые 14 дней бесплатно.",
+        "Мы предлагаем гибкие тарифные планы от 2 990 ₽/есяц  индивидуальных пользователей до корпоративных решений. Первые 14 дней бесплатно.",
     },
   ];
 
@@ -204,30 +205,22 @@ export default function LandingVariants({
           <header className="py-4 mb-12">
             <div className="flex items-center justify-between relative z-10">
               <div className="flex items-center gap-6">
+                {/* Logo with Text */}
                 <div className="flex items-center gap-3">
-                  {/* Вариант 1: Простой белый круглый фон */}
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center"
+                  <LogoVariant2
+                    className="w-10 h-10"
                     style={{
-                      backgroundColor: "#FFFFFF",
-                      boxShadow:
-                        "0 2px 8px rgba(0, 0, 0, 0.15)",
+                      color: "#FFFFFF",
+                      filter:
+                        "drop-shadow(0 2px 8px rgba(0,0,0,0.5)) drop-shadow(0 0 20px rgba(255,255,255,0.6)) drop-shadow(0 0 30px rgba(255,255,255,0.4))",
                     }}
-                  >
-                    <LogoVariant2
-                      className="w-7 h-7"
-                      style={{
-                        color: theme.accent.green,
-                      }}
-                    />
-                  </div>
+                  />
                   <span
                     style={{
                       color: "#FFFFFF",
-                      fontWeight: 600,
                       fontSize: "1.25rem",
-                      letterSpacing: "-0.02em",
-                      textShadow: "0 2px 4px rgba(0,0,0,0.2)",
+                      fontWeight: 600,
+                      textShadow: "0 2px 8px rgba(0,0,0,0.5)",
                     }}
                   >
                     zemscan.ru
@@ -460,48 +453,47 @@ export default function LandingVariants({
         </div>
       </section>
 
-      {/* Why Section - White Background */}
-      <ScrollReveal>
-        <section
-          className="px-6 py-20"
-          style={{ backgroundColor: theme.bg.primary }}
-        >
-          <div className="max-w-7xl mx-auto text-center">
+      {/* Problem Statement Section - After Hero */}
+      <section
+        className="px-6 py-24"
+        style={{ backgroundColor: theme.bg.primary }}
+      >
+        <div className="max-w-4xl mx-auto text-center">
+          <ScrollReveal>
             <div
-              className="text-sm mb-3"
+              className="inline-block px-4 py-2 rounded-full text-xs mb-6"
               style={{
-                color: theme.text.muted,
-                letterSpacing: "0.05em",
+                backgroundColor: `${theme.accent.green}15`,
+                color: theme.accent.green,
+                fontWeight: 600,
               }}
             >
-              (Зачем инвестировать в земельные участки)
+              ПОЧЕМУ ВАЖЕН АНАЛИЗ
             </div>
             <h2
               className="mb-6"
               style={{
-                fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
+                fontSize: "clamp(2rem, 4vw, 2.75rem)",
                 fontWeight: 500,
                 color: theme.text.primary,
                 lineHeight: "1.2",
               }}
             >
-              Раскройте потенциал земельнх участков
-              <br />с помощью эффективного инвестирования
+              Ошибка при покупке земли стоит дорого
             </h2>
             <p
-              className="max-w-3xl mx-auto text-lg"
+              className="text-lg"
               style={{
                 color: theme.text.secondary,
                 lineHeight: "1.6",
               }}
             >
-              Раскройте будущее вших инвестиций через участки,
-              которые обеспечивают влияние, способствуют росту и
-              гарантируют долгосрочный успех.
+              Мы проанализировали 200 000+ лотов и нашли, что
+              каждый третий имеет скрытые ограничения
             </p>
-          </div>
-        </section>
-      </ScrollReveal>
+          </ScrollReveal>
+        </div>
+      </section>
 
       {/* Features Section - Alternating Layout */}
       <section
@@ -530,7 +522,7 @@ export default function LandingVariants({
                     color: theme.text.primary,
                   }}
                 >
-                  Отслеживайте новые лоты в реальном времни
+                  Отслеживайте новые лоты в реальном времени
                 </h2>
                 <p
                   className="mb-6"
@@ -620,7 +612,7 @@ export default function LandingVariants({
                     lineHeight: "1.6",
                   }}
                 >
-                  Принимайте решения на осове данных с помощью
+                  Принимайте решения на основе данных с помощью
                   подробных аналитических отчетов и визуализаций
                   рыночных трендов.
                 </p>
@@ -681,14 +673,14 @@ export default function LandingVariants({
                   }}
                 >
                   Получайте детальные отчеты о правовом статусе,
-                  экологических рисках и инвестиционном потециал
-                  каждого участка.
+                  экологических рисках и инвестиционном
+                  потенциале каждого участка.
                 </p>
                 <ul className="space-y-3">
                   {[
-                    "Проверк правового статуса и обременений",
+                    "Проверка правового статуса и обременений",
                     "Экологический и геологический анализ",
-                    "Оценка инвестиционного потенцала",
+                    "Оценка инвестиционного потенциала",
                   ].map((item, i) => (
                     <li
                       key={i}
@@ -736,7 +728,7 @@ export default function LandingVariants({
               color: "#FFFFFF",
             }}
           >
-            Упростите поиск и управление
+            простите поиск и управление
             <br />
             земельными активами
           </h2>
@@ -1037,7 +1029,7 @@ export default function LandingVariants({
               {
                 badge: "Эксклюзив",
                 badgeColor: "#FF9800",
-                title: "Бесплатный анализ участка",
+                title: "Бесплатный аналз участка",
                 description:
                   "Стоимость 4 990 ₽ — осталось 53 из 100",
               },
@@ -1157,6 +1149,181 @@ export default function LandingVariants({
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer
+        className="px-6 py-16"
+        style={{ backgroundColor: theme.bg.secondary }}
+      >
+        <div className="max-w-7xl mx-auto">
+          {/* Top Section */}
+          <div
+            className="grid gap-12 mb-12"
+            style={{
+              gridTemplateColumns:
+                window.innerWidth >= 768
+                  ? "2fr 1fr 1fr 1fr"
+                  : "1fr",
+            }}
+          >
+            {/* Logo and Description */}
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <LogoVariant2
+                  className="w-10 h-10"
+                  style={{
+                    color: theme.accent.green,
+                  }}
+                />
+                <span
+                  style={{
+                    color: theme.text.primary,
+                    fontSize: "1.125rem",
+                    fontWeight: 600,
+                  }}
+                >
+                  zemscan.ru
+                </span>
+              </div>
+              <p
+                className="text-sm"
+                style={{
+                  color: theme.text.muted,
+                  lineHeight: "1.6",
+                }}
+              >
+                Профессиональная оценка земельных участков на
+                основе ИИ-технологий
+              </p>
+            </div>
+
+            {/* Продукт */}
+            <div>
+              <h4
+                className="mb-4"
+                style={{
+                  color: theme.text.primary,
+                  fontWeight: 600,
+                  fontSize: "0.9375rem",
+                }}
+              >
+                Продукт
+              </h4>
+              <ul className="space-y-3">
+                {[
+                  { text: "Возможности", href: "#features" },
+                  { text: "Тарифы", href: "#pricing" },
+                  {
+                    text: "Примеры отчётов",
+                    href: "#examples",
+                  },
+                  { text: "API", href: "#api" },
+                ].map((link, i) => (
+                  <li key={i}>
+                    <a
+                      href={link.href}
+                      className="text-sm transition-opacity hover:opacity-70"
+                      style={{ color: theme.text.secondary }}
+                    >
+                      {link.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Компания */}
+            <div>
+              <h4
+                className="mb-4"
+                style={{
+                  color: theme.text.primary,
+                  fontWeight: 600,
+                  fontSize: "0.9375rem",
+                }}
+              >
+                Компания
+              </h4>
+              <ul className="space-y-3">
+                {[
+                  { text: "О нас", href: "#about" },
+                  { text: "Блог", href: "#blog" },
+                  { text: "Контакты", href: "#contacts" },
+                  { text: "Вакансии", href: "#careers" },
+                ].map((link, i) => (
+                  <li key={i}>
+                    <a
+                      href={link.href}
+                      className="text-sm transition-opacity hover:opacity-70"
+                      style={{ color: theme.text.secondary }}
+                    >
+                      {link.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Поддержка */}
+            <div>
+              <h4
+                className="mb-4"
+                style={{
+                  color: theme.text.primary,
+                  fontWeight: 600,
+                  fontSize: "0.9375rem",
+                }}
+              >
+                Поддержка
+              </h4>
+              <ul className="space-y-3">
+                {[
+                  { text: "Помощь", href: "#help" },
+                  { text: "Документация", href: "#docs" },
+                  {
+                    text: "info@zemscan.ru",
+                    href: "mailto:info@zemscan.ru",
+                  },
+                ].map((link, i) => (
+                  <li key={i}>
+                    <a
+                      href={link.href}
+                      className="text-sm transition-opacity hover:opacity-70"
+                      style={{ color: theme.text.secondary }}
+                    >
+                      {link.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div
+            className="pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4"
+            style={{ borderColor: theme.border }}
+          >
+            <p
+              className="text-sm"
+              style={{ color: theme.text.muted }}
+            >
+              © 2025 ZemScan. Все права защищены.
+            </p>
+
+            <a
+              href="https://t.me/zemscan"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 transition-opacity hover:opacity-70"
+              style={{ color: theme.accent.green }}
+            >
+              <Send className="w-5 h-5" />
+              <span>Telegram-канал</span>
+            </a>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
