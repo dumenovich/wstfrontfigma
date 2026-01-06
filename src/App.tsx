@@ -4,10 +4,15 @@ import { LogoVariant2 } from "./components/LogoVariants";
 import Blog from "./components/Blog";
 import Login from "./components/Login";
 import LandingVariants from "./components/LandingVariants";
+import BlogPage from "./pages/Blog";
+import ArticlePage from "./pages/Article";
 
 export default function App() {
   const [showBlogPreview, setShowBlogPreview] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showBlogPage, setShowBlogPage] = useState(false);
+  const [showArticle, setShowArticle] = useState(false);
+  const [selectedArticleId, setSelectedArticleId] = useState<number | null>(null);
   const [isDark, setIsDark] = useState(() => {
     const saved = localStorage.getItem("theme");
     return saved === "dark";
@@ -71,9 +76,40 @@ export default function App() {
     return <Blog onBack={() => setShowBlogPreview(false)} />;
   }
 
+  // Показываем страницу журнала
+  if (showBlogPage) {
+    return (
+      <BlogPage
+        onBack={() => setShowBlogPage(false)}
+        onArticleClick={(postId) => {
+          setSelectedArticleId(postId);
+          setShowArticle(true);
+          setShowBlogPage(false);
+        }}
+      />
+    );
+  }
+
   // Показываем Login
   if (showLogin) {
     return <Login onBack={() => setShowLogin(false)} />;
+  }
+
+  // Показываем статью
+  if (showArticle && selectedArticleId !== null) {
+    return (
+      <ArticlePage
+        articleId={selectedArticleId}
+        onBack={() => {
+          setShowArticle(false);
+          setShowBlogPage(false);
+        }}
+        onBackToBlog={() => {
+          setShowArticle(false);
+          setShowBlogPage(true);
+        }}
+      />
+    );
   }
 
   return (
@@ -86,6 +122,7 @@ export default function App() {
         theme={theme}
         isDark={isDark}
         onLoginClick={() => setShowLogin(true)}
+        onBlogClick={() => setShowBlogPage(true)}
         toggleTheme={toggleTheme}
       />
     </div>

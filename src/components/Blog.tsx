@@ -217,9 +217,6 @@ export default function Blog({ onBack }: BlogProps) {
               </a>
             </div>
             <div className="h-8 w-px bg-white/10 hidden md:block" />
-            <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">
-              Скоро запуск
-            </Badge>
           </div>
         </div>
       </header>

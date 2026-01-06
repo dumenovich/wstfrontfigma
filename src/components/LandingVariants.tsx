@@ -48,6 +48,7 @@ type Props = {
   theme: Theme;
   isDark: boolean;
   onLoginClick: () => void;
+  onBlogClick: () => void;
   toggleTheme: () => void;
 };
 
@@ -70,6 +71,7 @@ export default function LandingVariants({
   theme,
   isDark,
   onLoginClick,
+  onBlogClick,
   toggleTheme,
 }: Props) {
   const [email, setEmail] = useState("");
@@ -238,18 +240,20 @@ export default function LandingVariants({
                 />
 
                 {/* Журнал link - рядом с логотипом */}
-                <a
-                  href="#blog"
+                <button
+                  onClick={onBlogClick}
                   className="px-4 py-2 rounded-lg transition-all hover:bg-white/10"
                   style={{
                     color: "#FFFFFF",
                     fontWeight: 500,
                     fontSize: "0.9375rem",
                     backgroundColor: "rgba(255,255,255,0.1)",
+                    border: "none",
+                    cursor: "pointer",
                   }}
                 >
                   Журнал
-                </a>
+                </button>
               </div>
 
               <nav className="flex items-center gap-6">
@@ -334,7 +338,7 @@ export default function LandingVariants({
                       letterSpacing: "0.02em",
                     }}
                   >
-                    Запуск — весна 2026
+                    Запуск — март 2026
                   </p>
                 </div>
               </div>
@@ -849,7 +853,7 @@ export default function LandingVariants({
                 <ul className="space-y-3">
                   {[
                     "Автоматический сбор данных с торговых площадок",
-                    "Гибкие фильтры: регион, площадь, ВРИ, бюджет",
+                    "Гибкие фильтры: регион, площадь, ВРИ, бюдж��т",
                     "Уведомления в Telegram и на email",
                   ].map((item, i) => (
                     <li
@@ -989,7 +993,7 @@ export default function LandingVariants({
                 <ul className="space-y-3">
                   {[
                     "Охранные зоны (ЗОУИТ): водоохранные, ЛЭП, газопроводы",
-                    "Обременения: аресты, залоги, сервитуты",
+                    "Обременения: арест��, залоги, сервитуты",
                     "Категория земли и вид разрешённого использования",
                   ].map((item, i) => (
                     <li
@@ -1458,19 +1462,6 @@ export default function LandingVariants({
               }}
             >
               <a
-                href="#blog"
-                className="transition-opacity hover:opacity-70"
-                style={{
-                  color: theme.text.secondary,
-                  lineHeight: "1",
-                }}
-              >
-                Журнал
-              </a>
-              <span style={{ opacity: 0.5, lineHeight: "1" }}>
-                ·
-              </span>
-              <a
                 href="mailto:info@zemscan.ru"
                 className="transition-opacity hover:opacity-70"
                 style={{
@@ -1487,7 +1478,7 @@ export default function LandingVariants({
                 href="https://t.me/zemscan"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-opacity hover:opacity-70 inline-flex items-center gap-1.5"
+                className="transition-opacity hover:opacity-70 inline-flex items-baseline gap-1.5"
                 style={{
                   color: theme.text.secondary,
                   lineHeight: "1",
