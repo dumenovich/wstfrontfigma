@@ -6,8 +6,6 @@ import {
   BarChart3,
   FileText,
   TrendingUp,
-  Sun,
-  Moon,
   MapPin,
   Send,
   Compass,
@@ -114,25 +112,23 @@ export default function LandingVariants({
 
   const faqs = [
     {
-      question: "Как ZemScan помогает нйти земельные участки?",
+      question: "Как zemscan помогает найти участок?",
       answer:
-        "ZemScan автоматически мониторит все публичные источники данных о лотах аренды земельных участков, фильтрует их по вашим критериям и отправляет уведомления о новых возможностях.",
+        "Мы мониторим торговые площадки 24/7 и присылаем уведомления о новых лотах по вашим критериям. Каждый лот — с полным анализом.",
     },
     {
-      question: "Какие данные включены в отчет о рисках?",
+      question: "Какие данные включены в отчёт?",
       answer:
-        "Отчет включает анализ правового статуса участка, оценку рыночной стоимости, историю сделок, наличие обременений, экологические риски и инвестиционный потенциал.",
+        "Оценка рыночной стоимости, проверка рисков (ЗОУИТ, обременения, ВРИ), анализ инфраструктуры и коммуникаций — всего 15+ факторов.",
     },
     {
-      question:
-        "Можно ли интегрировать ZemScan с другими системами?",
-      answer:
-        "Да, мы предоставляем API для интеграции с вашими CRM, ERP и другими корпоративными системами. Документация доступна после регистрации.",
+      question: "Какие регионы покрываете?",
+      answer: "Мониторим и анализируем лоты по всей России",
     },
     {
-      question: "Сколько стоит подписка на ZemScan?",
+      question: "Когда запуск?",
       answer:
-        "Мы предлагаем гибкие тарифные планы от 2 990 ₽/еяц  индивидуальных пользователей до корпоративных решений. Первые 14 дней бесплатно.",
+        "Март 2026. Подпишитесь, чтобы узнать первыми и получить бонусы раннего доступа.",
     },
   ];
 
@@ -236,7 +232,8 @@ export default function LandingVariants({
                   style={{
                     width: "1px",
                     height: "24px",
-                    backgroundColor: "rgba(255,255,255,0.3)",
+                    backgroundColor: theme.text.secondary,
+                    opacity: 0.6,
                   }}
                 />
 
@@ -280,23 +277,6 @@ export default function LandingVariants({
                     info@zemscan.ru
                   </a>
                 </div>
-
-                {/* Theme Toggle */}
-                <button
-                  onClick={toggleTheme}
-                  className="w-9 h-9 rounded-lg flex items-center justify-center transition-all hover:bg-white/10"
-                  style={{
-                    backgroundColor: "rgba(255,255,255,0.1)",
-                    color: "#FFFFFF",
-                  }}
-                  aria-label="Переключить тему"
-                >
-                  {isDark ? (
-                    <Sun className="w-4 h-4" />
-                  ) : (
-                    <Moon className="w-4 h-4" />
-                  )}
-                </button>
               </nav>
             </div>
           </header>
@@ -342,7 +322,8 @@ export default function LandingVariants({
                   style={{
                     backgroundColor: "rgba(255, 255, 255, 0.2)",
                     backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(255, 255, 255, 0.3)",
+                    border:
+                      "1px solid rgba(255, 255, 255, 0.3)",
                   }}
                 >
                   <p
@@ -737,7 +718,7 @@ export default function LandingVariants({
                   icon: Compass,
                   title: "Покупаете землю впервые",
                   description:
-                    "Хотите купить участок на торгах и не переплатить, избежать скрытых проблем",
+                    "Хотите купить участк на торгах и не переплатить, избежать скрытых проблем",
                 },
                 {
                   icon: LineChart,
@@ -860,7 +841,7 @@ export default function LandingVariants({
                     lineHeight: "1.6",
                   }}
                 >
-                  Получайте мгновенные уведомления о появлении
+                  Получайте мгновеные уведомления о поялении
                   новых земельных участков, соответствующих
                   вашим критериям. Больше никаких упущенных
                   возможностей
@@ -1083,7 +1064,7 @@ export default function LandingVariants({
                 >
                   Показываем расстояние до инженерных сетей и
                   ориентировочную стоимость подключения. Вы
-                  понимаете реальные затраты на освоение участка
+                  понимаете реальные затраты на своение участка
                 </p>
                 <ul className="space-y-3">
                   {[
@@ -1113,172 +1094,22 @@ export default function LandingVariants({
         </div>
       </section>
 
-      {/* Green CTA Section */}
-      <section
-        className="px-6 py-24"
-        style={{ backgroundColor: theme.accent.green }}
-      >
-        <div className="max-w-4xl mx-auto text-center">
-          <h2
-            className="mb-6"
-            style={{
-              fontSize: "clamp(2rem, 5vw, 3rem)",
-              fontWeight: 500,
-              color: "#FFFFFF",
-            }}
-          >
-            простите поиск и управление
-            <br />
-            земельными активами
-          </h2>
-          <p
-            className="mb-8 text-lg"
-            style={{ color: "rgba(255,255,255,0.9)" }}
-          >
-            Начните отслеживать лоты бесплатно. Без кредитной
-            карты. Отмените в любое время.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              className="px-10 py-4 rounded-xl transition-all hover:opacity-90"
-              style={{
-                backgroundColor: "#FFFFFF",
-                color: theme.accent.green,
-                border: "none",
-              }}
-            >
-              Создать аккаунт
-            </Button>
-            <Button
-              className="px-10 py-4 rounded-xl transition-all"
-              style={{
-                backgroundColor: "transparent",
-                color: "#FFFFFF",
-                border: "1px solid rgba(255,255,255,0.4)",
-              }}
-            >
-              Связаться с нами
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Property Cards Section */}
-      <section
-        className="px-6 py-20"
-        style={{ backgroundColor: theme.bg.secondary }}
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2
-              className="mb-4"
-              style={{
-                fontSize: "clamp(2rem, 4vw, 2.75rem)",
-                fontWeight: 500,
-                color: theme.text.primary,
-              }}
-            >
-              Актуальные лоты
-            </h2>
-            <p style={{ color: theme.text.secondary }}>
-              Примеры земельных участков, доступных для аренды
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                title: "Участок 12.5 а",
-                location: "Московская область",
-                price: "2 500 000 ₽/гд",
-                type: "Коммерческая",
-              },
-              {
-                title: "Участок 8.3 га",
-                location: "Ленинградская область",
-                price: "1 800 000 ₽/год",
-                type: "Сельхоз",
-              },
-              {
-                title: "Участок 5.2 га",
-                location: "Краснодарский край",
-                price: "3 200 000 ₽/гд",
-                type: "Промышленная",
-              },
-            ].map((lot, i) => (
-              <div
-                key={i}
-                className="rounded-2xl overflow-hidden transition-transform hover:scale-105"
-                style={{
-                  backgroundColor: theme.bg.card,
-                  border: `1px solid ${theme.border}`,
-                }}
-              >
-                <div className="h-48 relative overflow-hidden">
-                  <img
-                    src={landImage}
-                    alt={lot.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div
-                    className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs"
-                    style={{
-                      backgroundColor: theme.accent.green,
-                      color: "#FFFFFF",
-                    }}
-                  >
-                    {lot.type}
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3
-                    className="mb-2"
-                    style={{
-                      fontSize: "1.25rem",
-                      fontWeight: 500,
-                      color: theme.text.primary,
-                    }}
-                  >
-                    {lot.title}
-                  </h3>
-                  <div
-                    className="flex items-center gap-2 mb-4"
-                    style={{ color: theme.text.muted }}
-                  >
-                    <MapPin className="w-4 h-4" />
-                    <span className="text-sm">
-                      {lot.location}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span
-                      style={{
-                        fontSize: "1.5rem",
-                        fontWeight: 600,
-                        color: theme.accent.green,
-                      }}
-                    >
-                      {lot.price}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* FAQ Section */}
       <section
         className="px-6 py-20"
         style={{ backgroundColor: theme.bg.primary }}
       >
         <div className="max-w-4xl mx-auto">
-          <div
-            className="text-center mb-12"
-            style={{ color: theme.text.muted }}
-          >
-            (FAQ)
+          <div className="text-center mb-12">
+            <div
+              className="inline-block px-4 py-2 rounded-full text-xs mb-4"
+              style={{
+                backgroundColor: `${theme.accent.green}20`,
+                color: theme.accent.green,
+              }}
+            >
+              FAQ
+            </div>
           </div>
 
           <div>
@@ -1574,175 +1405,118 @@ export default function LandingVariants({
 
       {/* Footer */}
       <footer
-        className="px-6 py-16"
+        className="px-6 py-12"
         style={{ backgroundColor: theme.bg.secondary }}
       >
         <div className="max-w-7xl mx-auto">
-          {/* Top Section */}
-          <div
-            className="grid gap-12 mb-12"
-            style={{
-              gridTemplateColumns:
-                window.innerWidth >= 768
-                  ? "2fr 1fr 1fr 1fr"
-                  : "1fr",
-            }}
-          >
-            {/* Logo and Description */}
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <LogoVariant2
-                  className="w-10 h-10"
-                  style={{
-                    color: theme.accent.green,
-                  }}
-                />
+          <div className="flex items-center justify-between gap-8 flex-wrap">
+            {/* Logo and Title */}
+            <div className="flex items-center gap-3">
+              <LogoVariant2
+                className="w-8 h-8"
+                style={{
+                  color: theme.accent.green,
+                }}
+              />
+              <div className="flex items-center gap-3">
                 <span
                   style={{
                     color: theme.text.primary,
-                    fontSize: "1.125rem",
+                    fontSize: "1rem",
                     fontWeight: 600,
                   }}
                 >
                   zemscan.ru
                 </span>
+
+                {/* Vertical Divider */}
+                <div
+                  style={{
+                    width: "1px",
+                    height: "24px",
+                    backgroundColor: theme.border,
+                  }}
+                />
+
+                <span
+                  style={{
+                    color: theme.text.secondary,
+                    fontSize: "0.9375rem",
+                  }}
+                >
+                  Анализ и оценка земли на торгах
+                </span>
               </div>
-              <p
-                className="text-sm"
+            </div>
+
+            {/* Links and Copyright */}
+            <div
+              className="flex items-baseline gap-3 flex-wrap"
+              style={{
+                color: theme.text.secondary,
+                fontSize: "0.9375rem",
+              }}
+            >
+              <a
+                href="#blog"
+                className="transition-opacity hover:opacity-70"
+                style={{
+                  color: theme.text.secondary,
+                  lineHeight: "1",
+                }}
+              >
+                Журнал
+              </a>
+              <span style={{ opacity: 0.5, lineHeight: "1" }}>
+                ·
+              </span>
+              <a
+                href="mailto:info@zemscan.ru"
+                className="transition-opacity hover:opacity-70"
+                style={{
+                  color: theme.text.secondary,
+                  lineHeight: "1",
+                }}
+              >
+                info@zemscan.ru
+              </a>
+              <span style={{ opacity: 0.5, lineHeight: "1" }}>
+                ·
+              </span>
+              <a
+                href="https://t.me/zemscan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-opacity hover:opacity-70 inline-flex items-center gap-1.5"
+                style={{
+                  color: theme.text.secondary,
+                  lineHeight: "1",
+                }}
+              >
+                <Send
+                  className="w-3.5 h-3.5"
+                  style={{
+                    verticalAlign: "baseline",
+                    position: "relative",
+                    top: "0.15em",
+                  }}
+                />
+                <span>Telegram</span>
+              </a>
+              <span style={{ opacity: 0.5, lineHeight: "1" }}>
+                ·
+              </span>
+
+              <span
                 style={{
                   color: theme.text.muted,
-                  lineHeight: "1.6",
+                  fontSize: "0.8125rem",
+                  lineHeight: "1",
                 }}
               >
-                Профессиональная оценка земельных участков на
-                основе ИИ-технологий
-              </p>
+                © 2026 zemscan
+              </span>
             </div>
-
-            {/* Продукт */}
-            <div>
-              <h4
-                className="mb-4"
-                style={{
-                  color: theme.text.primary,
-                  fontWeight: 600,
-                  fontSize: "0.9375rem",
-                }}
-              >
-                Продукт
-              </h4>
-              <ul className="space-y-3">
-                {[
-                  { text: "Возможности", href: "#features" },
-                  { text: "Тарифы", href: "#pricing" },
-                  {
-                    text: "Примеры отчётов",
-                    href: "#examples",
-                  },
-                  { text: "API", href: "#api" },
-                ].map((link, i) => (
-                  <li key={i}>
-                    <a
-                      href={link.href}
-                      className="text-sm transition-opacity hover:opacity-70"
-                      style={{ color: theme.text.secondary }}
-                    >
-                      {link.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Компания */}
-            <div>
-              <h4
-                className="mb-4"
-                style={{
-                  color: theme.text.primary,
-                  fontWeight: 600,
-                  fontSize: "0.9375rem",
-                }}
-              >
-                Компания
-              </h4>
-              <ul className="space-y-3">
-                {[
-                  { text: "О нас", href: "#about" },
-                  { text: "Блог", href: "#blog" },
-                  { text: "Контакты", href: "#contacts" },
-                  { text: "Вакансии", href: "#careers" },
-                ].map((link, i) => (
-                  <li key={i}>
-                    <a
-                      href={link.href}
-                      className="text-sm transition-opacity hover:opacity-70"
-                      style={{ color: theme.text.secondary }}
-                    >
-                      {link.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Поддержка */}
-            <div>
-              <h4
-                className="mb-4"
-                style={{
-                  color: theme.text.primary,
-                  fontWeight: 600,
-                  fontSize: "0.9375rem",
-                }}
-              >
-                Поддержка
-              </h4>
-              <ul className="space-y-3">
-                {[
-                  { text: "Помощь", href: "#help" },
-                  { text: "Документация", href: "#docs" },
-                  {
-                    text: "info@zemscan.ru",
-                    href: "mailto:info@zemscan.ru",
-                  },
-                ].map((link, i) => (
-                  <li key={i}>
-                    <a
-                      href={link.href}
-                      className="text-sm transition-opacity hover:opacity-70"
-                      style={{ color: theme.text.secondary }}
-                    >
-                      {link.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom Bar */}
-          <div
-            className="pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4"
-            style={{ borderColor: theme.border }}
-          >
-            <p
-              className="text-sm"
-              style={{ color: theme.text.muted }}
-            >
-              © 2025 zemscan | Wasteland Tech
-            </p>
-
-            <a
-              href="https://t.me/zemscan"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 transition-opacity hover:opacity-70"
-              style={{ color: theme.accent.green }}
-            >
-              <Send className="w-5 h-5" />
-              <span>Telegram-канал</span>
-            </a>
           </div>
         </div>
       </footer>
