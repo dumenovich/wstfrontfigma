@@ -10,6 +10,10 @@ import {
   Moon,
   MapPin,
   Send,
+  Compass,
+  LineChart,
+  Layers,
+  Zap,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -128,7 +132,7 @@ export default function LandingVariants({
     {
       question: "Сколько стоит подписка на ZemScan?",
       answer:
-        "Мы предлагаем гибкие тарифные планы от 2 990 ₽/есяц  индивидуальных пользователей до корпоративных решений. Первые 14 дней бесплатно.",
+        "Мы предлагаем гибкие тарифные планы от 2 990 ₽/еяц  индивидуальных пользователей до корпоративных решений. Первые 14 дней бесплатно.",
     },
   ];
 
@@ -330,6 +334,29 @@ export default function LandingVariants({
                   </motion.span>
                 </AnimatePresence>
               </h1>
+
+              {/* Launch Badge */}
+              <div className="mb-6">
+                <div
+                  className="inline-block px-5 py-2.5 rounded-full"
+                  style={{
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    backdropFilter: "blur(10px)",
+                    border: "1px solid rgba(255, 255, 255, 0.3)",
+                  }}
+                >
+                  <p
+                    style={{
+                      color: "#FFFFFF",
+                      fontSize: "0.9375rem",
+                      fontWeight: 600,
+                      letterSpacing: "0.02em",
+                    }}
+                  >
+                    Запуск — весна 2026
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Right: Subheading & CTA */}
@@ -344,7 +371,7 @@ export default function LandingVariants({
                 Мы проверяем каждый лот и показываем реальную
                 картину: справедливую цену, скрытые риски и всё,
                 что нужно знать до покупки. Принимайте решения
-                на основе данных, а не догадок.
+                на основе данных, а не доадок.
               </p>
               <a
                 href="#subscribe"
@@ -479,7 +506,8 @@ export default function LandingVariants({
                 lineHeight: "1.2",
               }}
             >
-              Ошибка при покупке земли стоит дорого
+              Ошибка при покупке земли стоит дорого — и
+              исправить её нельзя
             </h2>
             <p
               className="text-lg"
@@ -489,8 +517,309 @@ export default function LandingVariants({
               }}
             >
               Мы проанализировали 200 000+ лотов и нашли, что
-              каждый третий имеет скрытые ограничения
+              каждый третий имеет скрытые ограничения.
             </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Solution Section - Comparison */}
+      <section
+        className="px-6 py-24"
+        style={{ backgroundColor: theme.bg.secondary }}
+      >
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal>
+            {/* Header */}
+            <div className="text-center mb-16">
+              <div
+                className="inline-block px-4 py-2 rounded-full text-xs mb-6"
+                style={{
+                  backgroundColor: `${theme.accent.green}15`,
+                  color: theme.accent.green,
+                  fontWeight: 600,
+                }}
+              >
+                НАШЕ РЕШЕНИЕ
+              </div>
+              <h2
+                className="mb-6"
+                style={{
+                  fontSize: "clamp(2rem, 4vw, 2.75rem)",
+                  fontWeight: 500,
+                  color: theme.text.primary,
+                  lineHeight: "1.2",
+                }}
+              >
+                zemscan проверяет участок за вас
+              </h2>
+              <p
+                className="text-lg max-w-3xl mx-auto"
+                style={{
+                  color: theme.text.secondary,
+                  lineHeight: "1.6",
+                }}
+              >
+                Автоматический анализ 15+ факторов — от охранных
+                зон до рыночной цены. Вы получаете полный отчёт,
+                чтобы принять взвешенное решение.
+              </p>
+            </div>
+
+            {/* Comparison Table */}
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Left Column - Самостоятельно */}
+              <div
+                className="rounded-2xl p-8"
+                style={{
+                  backgroundColor: theme.bg.card,
+                  border: `1px solid ${theme.border}`,
+                  opacity: 0.6,
+                  filter: "grayscale(20%)",
+                }}
+              >
+                <h3
+                  className="mb-8 pb-4 border-b"
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: 500,
+                    color: theme.text.muted,
+                    borderColor: theme.border,
+                  }}
+                >
+                  Самостоятельно
+                </h3>
+                <div className="space-y-6">
+                  {[
+                    { label: "Время", value: "3-6 недель" },
+                    {
+                      label: "Стоимость",
+                      value: "До 40 000 ₽",
+                    },
+                    {
+                      label: "Полнота",
+                      value: "Зависит от опыта",
+                    },
+                    { label: "Риск ошибки", value: "Высокий" },
+                  ].map((item, i) => (
+                    <div key={i}>
+                      <div
+                        className="text-sm mb-2"
+                        style={{
+                          color: theme.text.muted,
+                          fontWeight: 500,
+                          opacity: 0.7,
+                        }}
+                      >
+                        {item.label}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "1.125rem",
+                          color: theme.text.muted,
+                          opacity: 0.8,
+                        }}
+                      >
+                        {item.value}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Column - С zemscan */}
+              <div
+                className="rounded-2xl p-8 relative"
+                style={{
+                  backgroundColor: theme.bg.card,
+                  border: `2px solid ${theme.accent.green}`,
+                  boxShadow: `0 0 0 4px ${theme.accent.green}15`,
+                }}
+              >
+                <div
+                  className="absolute -top-3 left-8 px-3 py-1 rounded-full text-xs"
+                  style={{
+                    backgroundColor: theme.accent.green,
+                    color: "#FFFFFF",
+                    fontWeight: 600,
+                  }}
+                >
+                  Рекомендуем
+                </div>
+                <h3
+                  className="mb-8 pb-4 border-b"
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: 600,
+                    color: theme.accent.green,
+                    borderColor: theme.border,
+                  }}
+                >
+                  С zemscan
+                </h3>
+                <div className="space-y-6">
+                  {[
+                    { label: "Время", value: "Минуты" },
+                    {
+                      label: "Стоимость",
+                      value: "В разы дешевле",
+                    },
+                    { label: "Полнота", value: "15+ факторов" },
+                    {
+                      label: "Риск ошибки",
+                      value: "Минимальный",
+                    },
+                  ].map((item, i) => (
+                    <div key={i}>
+                      <div
+                        className="text-sm mb-2"
+                        style={{
+                          color: theme.text.muted,
+                          fontWeight: 500,
+                        }}
+                      >
+                        {item.label}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "1.125rem",
+                          fontWeight: 600,
+                          color: theme.accent.green,
+                        }}
+                      >
+                        {item.value}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Target Audience Section - Для кого */}
+      <section
+        className="px-6 py-24"
+        style={{ backgroundColor: theme.bg.primary }}
+      >
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal>
+            {/* Header */}
+            <div className="text-center mb-16">
+              <div
+                className="inline-block px-4 py-2 rounded-full text-xs mb-6"
+                style={{
+                  backgroundColor: `${theme.accent.green}15`,
+                  color: theme.accent.green,
+                  fontWeight: 600,
+                }}
+              >
+                ДЛЯ КОГО ZEMSCAN
+              </div>
+              <h2
+                className="mb-6"
+                style={{
+                  fontSize: "clamp(2rem, 4vw, 2.75rem)",
+                  fontWeight: 500,
+                  color: theme.text.primary,
+                  lineHeight: "1.2",
+                }}
+              >
+                Сервис будет полезен, если вы:
+              </h2>
+            </div>
+
+            {/* 4 Cards Grid */}
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                {
+                  icon: Compass,
+                  title: "Покупаете землю впервые",
+                  description:
+                    "Хотите купить участок на торгах и не переплатить, избежать скрытых проблем",
+                },
+                {
+                  icon: LineChart,
+                  title: "Инвестируете в землю",
+                  description:
+                    "Хотите понимать реальную стоимость и риски перед вложением",
+                },
+                {
+                  icon: Layers,
+                  title: "Застройщик или девелопер",
+                  description:
+                    "Нужен полный анализ: градпотенциал, коммуникации, ограничения",
+                },
+                {
+                  icon: Zap,
+                  title: "Цените своё время",
+                  description:
+                    "Нет возможности тратить недели на сбор информации из разных источников",
+                },
+              ].map((card, i) => {
+                const Icon = card.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      delay: i * 0.1,
+                      duration: 0.5,
+                    }}
+                    whileHover={{
+                      y: -4,
+                      transition: { duration: 0.2 },
+                    }}
+                    className="rounded-2xl p-8 cursor-pointer"
+                    style={{
+                      backgroundColor: theme.bg.card,
+                      border: `1px solid ${theme.border}`,
+                    }}
+                  >
+                    <motion.div
+                      className="w-12 h-12 rounded-full flex items-center justify-center mb-5"
+                      style={{
+                        backgroundColor: `${theme.accent.green}15`,
+                        boxShadow: `0 0 0 1px ${theme.accent.green}20`,
+                      }}
+                      whileHover={{
+                        scale: 1.1,
+                        rotate: 5,
+                        transition: { duration: 0.3 },
+                      }}
+                    >
+                      <Icon
+                        className="w-6 h-6"
+                        style={{ color: theme.accent.green }}
+                      />
+                    </motion.div>
+                    <h3
+                      className="mb-4"
+                      style={{
+                        fontSize: "1.375rem",
+                        fontWeight: 600,
+                        color: theme.text.primary,
+                        lineHeight: "1.3",
+                      }}
+                    >
+                      {card.title}
+                    </h3>
+                    <p
+                      style={{
+                        color: theme.text.secondary,
+                        lineHeight: "1.6",
+                        fontSize: "1rem",
+                      }}
+                    >
+                      {card.description}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
           </ScrollReveal>
         </div>
       </section>
@@ -534,13 +863,13 @@ export default function LandingVariants({
                   Получайте мгновенные уведомления о появлении
                   новых земельных участков, соответствующих
                   вашим критериям. Больше никаких упущенных
-                  возможностей.
+                  возможностей
                 </p>
                 <ul className="space-y-3">
                   {[
-                    "Автоматический сбор данных из всех источников",
-                    "Персонализированные фильтры поиска",
-                    "Email и Telegram уведомления",
+                    "Автоматический сбор данных с торговых площадок",
+                    "Гибкие фильтры: регион, площадь, ВРИ, бюджет",
+                    "Уведомления в Telegram и на email",
                   ].map((item, i) => (
                     <li
                       key={i}
@@ -593,7 +922,7 @@ export default function LandingVariants({
                     color: theme.accent.green,
                   }}
                 >
-                  АНАЛИТИКА
+                  ОЦЕНКА
                 </div>
                 <h2
                   className="mb-6"
@@ -603,7 +932,7 @@ export default function LandingVariants({
                     color: theme.text.primary,
                   }}
                 >
-                  Детальная аналитика и отчеты
+                  Узнайте реальную цену участка
                 </h2>
                 <p
                   className="mb-6"
@@ -612,15 +941,15 @@ export default function LandingVariants({
                     lineHeight: "1.6",
                   }}
                 >
-                  Принимайте решения на основе данных с помощью
-                  подробных аналитических отчетов и визуализаций
-                  рыночных трендов.
+                  Сравниваем с аналогами, учитываем кадастровую
+                  стоимость и рыночные данные. Вы понимаете,
+                  справедлива ли цена на торгах
                 </p>
                 <ul className="space-y-3">
                   {[
-                    "Интерактивные графики и дашборды",
-                    "Сравнительный анализ участков",
-                    "Прогнозирование стоимости",
+                    "Анализ цен на аналогичные участки в районе",
+                    "Сравнение с кадастровой стоимостью",
+                    "Оценка отклонения от рынка",
                   ].map((item, i) => (
                     <li
                       key={i}
@@ -644,7 +973,7 @@ export default function LandingVariants({
 
           {/* Feature 3 - Risk Assessment */}
           <ScrollReveal delay={0.3}>
-            <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="grid md:grid-cols-2 gap-16 items-center mb-32">
               <div>
                 <div
                   className="inline-block px-4 py-2 rounded-full text-xs mb-4"
@@ -653,7 +982,7 @@ export default function LandingVariants({
                     color: theme.accent.green,
                   }}
                 >
-                  ОЦЕНКА РИСКОВ
+                  ЮРИДИЧЕСКИЙ АНАЛИЗ
                 </div>
                 <h2
                   className="mb-6"
@@ -663,7 +992,7 @@ export default function LandingVariants({
                     color: theme.text.primary,
                   }}
                 >
-                  Комплексная оценка инвестиционных рисков
+                  Находим скрытые ограничения до покупки
                 </h2>
                 <p
                   className="mb-6"
@@ -672,15 +1001,15 @@ export default function LandingVariants({
                     lineHeight: "1.6",
                   }}
                 >
-                  Получайте детальные отчеты о правовом статусе,
-                  экологических рисках и инвестиционном
-                  потенциале каждого участка.
+                  Проверяем участок по всем базам данных: от
+                  охранных зон до судебных споров. Вы узнаёте о
+                  проблемах заранее, а не после сделки
                 </p>
                 <ul className="space-y-3">
                   {[
-                    "Проверка правового статуса и обременений",
-                    "Экологический и геологический анализ",
-                    "Оценка инвестиционного потенциала",
+                    "Охранные зоны (ЗОУИТ): водоохранные, ЛЭП, газопроводы",
+                    "Обременения: аресты, залоги, сервитуты",
+                    "Категория земли и вид разрешённого использования",
                   ].map((item, i) => (
                     <li
                       key={i}
@@ -708,6 +1037,76 @@ export default function LandingVariants({
                   alt="Risk assessment"
                   className="w-full h-auto"
                 />
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Feature 4  */}
+          <ScrollReveal delay={0.2}>
+            <div className="grid md:grid-cols-2 gap-16 items-center mb-32">
+              <div
+                className="order-2 md:order-1 rounded-2xl overflow-hidden"
+                style={{ border: `1px solid ${theme.border}` }}
+              >
+                <img
+                  src={propertyImage}
+                  alt="Analytics"
+                  className="w-full h-auto"
+                />
+              </div>
+              <div className="order-1 md:order-2">
+                <div
+                  className="inline-block px-4 py-2 rounded-full text-xs mb-4"
+                  style={{
+                    backgroundColor: `${theme.accent.green}20`,
+                    color: theme.accent.green,
+                  }}
+                >
+                  ТЕХНИЧЕСКИЙ АНАЛИЗ
+                </div>
+                <h2
+                  className="mb-6"
+                  style={{
+                    fontSize: "clamp(2rem, 4vw, 2.75rem)",
+                    fontWeight: 500,
+                    color: theme.text.primary,
+                  }}
+                >
+                  Оцениваем доступность коммуникаций
+                </h2>
+                <p
+                  className="mb-6"
+                  style={{
+                    color: theme.text.secondary,
+                    lineHeight: "1.6",
+                  }}
+                >
+                  Показываем расстояние до инженерных сетей и
+                  ориентировочную стоимость подключения. Вы
+                  понимаете реальные затраты на освоение участка
+                </p>
+                <ul className="space-y-3">
+                  {[
+                    "Электричество: расстояние до ЛЭП, свободная мощность",
+                    "Газ: наличие магистрали, возможность подключения",
+                    "Дороги: подъезд к участку, качество покрытия",
+                  ].map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-3"
+                    >
+                      <CheckCircle2
+                        className="w-5 h-5 shrink-0 mt-0.5"
+                        style={{ color: theme.accent.green }}
+                      />
+                      <span
+                        style={{ color: theme.text.secondary }}
+                      >
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </ScrollReveal>
@@ -1020,7 +1419,7 @@ export default function LandingVariants({
                   "«7 скрытых рисков при покупке земли» — сразу на почту",
               },
               {
-                badge: "ри запуске",
+                badge: "При запуске",
                 badgeColor: "#2196F3",
                 title: "Персональная подборка",
                 description:
@@ -1029,9 +1428,9 @@ export default function LandingVariants({
               {
                 badge: "Эксклюзив",
                 badgeColor: "#FF9800",
-                title: "Бесплатный аналз участка",
+                title: "Бесплатный анализ участка",
                 description:
-                  "Стоимость 4 990 ₽ — осталось 53 из 100",
+                  "Полный анализ одного участка на выбор, для первых 100 подписчиков",
               },
             ].map((card, i) => (
               <motion.div
@@ -1095,13 +1494,36 @@ export default function LandingVariants({
               <span style={{ opacity: 0.5 }}>·</span>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4" />
-                <span>1-2 письма до запска</span>
+                <span>1-2 письма до запуска</span>
               </div>
               <span style={{ opacity: 0.5 }}>·</span>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4" />
                 <span>Отписка в один клик</span>
               </div>
+            </div>
+          </div>
+
+          {/* Launch Date */}
+          <div className="text-center mb-8">
+            <div
+              className="inline-block px-5 py-2.5 rounded-full"
+              style={{
+                backgroundColor: "rgba(255, 255, 255, 0.15)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+              }}
+            >
+              <p
+                style={{
+                  color: "#FFFFFF",
+                  fontSize: "0.9375rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.02em",
+                }}
+              >
+                Запуск — весна 2026
+              </p>
             </div>
           </div>
 
@@ -1308,7 +1730,7 @@ export default function LandingVariants({
               className="text-sm"
               style={{ color: theme.text.muted }}
             >
-              © 2025 ZemScan. Все права защищены.
+              © 2025 zemscan | Wasteland Tech
             </p>
 
             <a

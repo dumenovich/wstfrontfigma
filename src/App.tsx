@@ -43,7 +43,7 @@ export default function App() {
     : {
         bg: {
           primary: "#FAFFF2", // TEXT COLOR из палитры - светлый кремово-зеленый фон
-          secondary: "#F5FAE8",
+          secondary: "#EDF4DB",
           card: "#FFFFFF",
           overlay: "#F5F5F5",
         },
