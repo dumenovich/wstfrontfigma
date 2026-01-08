@@ -6,12 +6,14 @@ import Login from "./components/Login";
 import LandingVariants from "./components/LandingVariants";
 import BlogPage from "./pages/Blog";
 import ArticlePage from "./pages/Article";
+import ThankYou from "./components/ThankYou";
 
 export default function App() {
   const [showBlogPreview, setShowBlogPreview] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showBlogPage, setShowBlogPage] = useState(false);
   const [showArticle, setShowArticle] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
   const [selectedArticleId, setSelectedArticleId] = useState<number | null>(null);
   const [isDark, setIsDark] = useState(() => {
     const saved = localStorage.getItem("theme");
@@ -112,6 +114,11 @@ export default function App() {
     );
   }
 
+  // Показываем страницу благодарности
+  if (showThankYou) {
+    return <ThankYou email="test@example.com" onBack={() => setShowThankYou(false)} />;
+  }
+
   return (
     <div
       className="min-h-screen"
@@ -123,6 +130,7 @@ export default function App() {
         isDark={isDark}
         onLoginClick={() => setShowLogin(true)}
         onBlogClick={() => setShowBlogPage(true)}
+        onThankYouClick={() => setShowThankYou(true)}
         toggleTheme={toggleTheme}
       />
     </div>

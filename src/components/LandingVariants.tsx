@@ -49,17 +49,18 @@ type Props = {
   isDark: boolean;
   onLoginClick: () => void;
   onBlogClick: () => void;
+  onThankYouClick?: () => void;
   toggleTheme: () => void;
 };
 
 const dashboardImage =
   "https://images.unsplash.com/photo-1759752394755-1241472b589d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXNoYm9hcmQlMjBhbmFseXRpY3MlMjBzY3JlZW58ZW58MXx8fHwxNzY2OTg2NTE5fDA&ixlib=rb-4.1.0&q=80&w=1080";
 const propertyImage =
-  "https://images.unsplash.com/photo-1762941177632-fe37c485c428?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZWFsJTIwZXN0YXRlJTIwcHJvcGVydHklMjBjYXJkfGVufDF8fHx8MTc2NzA1MTU3Mnww&ixlib=rb-4.1.0&q=80&w=1080";
+  "https://images.unsplash.com/photo-1653074281018-c08f358059ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9wZXJ0eSUyMHZhbHVhdGlvbiUyMGNhbGN1bGF0b3J8ZW58MXx8fHwxNzY3NzczNjk2fDA&ixlib=rb-4.1.0&q=80&w=1080";
 const landImage =
   "https://images.unsplash.com/photo-1764222233275-87dc016c11dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYW5kJTIwZGV2ZWxvcG1lbnQlMjBhZXJpYWx8ZW58MXx8fHwxNzY3MDQ2NjExfDA&ixlib=rb-4.1.0&q=80&w=1080";
 const searchImage =
-  "https://images.unsplash.com/photo-1734209507417-1f70aa230aa7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9wZXJ0eSUyMHNlYXJjaCUyMGludGVyZmFjZXxlbnwxfHx8fDE3NjcwNTE1NzN8MA&ixlib=rb-4.1.0&q=80&w=1080";
+  "https://gisnavigator.co.uk/wp-content/uploads/2024/06/GIS-Body-Images-Importance-of-Spatial-Analysis.webp";
 const chartImage =
   "https://images.unsplash.com/photo-1730382624709-81e52dd294d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGNoYXJ0JTIwZ3JhcGh8ZW58MXx8fHwxNzY2OTkxNTE2fDA&ixlib=rb-4.1.0&q=80&w=1080";
 const growthImage =
@@ -72,6 +73,7 @@ export default function LandingVariants({
   isDark,
   onLoginClick,
   onBlogClick,
+  onThankYouClick,
   toggleTheme,
 }: Props) {
   const [email, setEmail] = useState("");
@@ -110,6 +112,9 @@ export default function LandingVariants({
     console.log("Email submitted:", email);
     alert("Спасибо за подписку! Мы сообщим о запуске.");
     setEmail("");
+    if (onThankYouClick) {
+      onThankYouClick();
+    }
   };
 
   const faqs = [
@@ -154,16 +159,12 @@ export default function LandingVariants({
           initial={{ scale: 1.1, backgroundPosition: "0% 50%" }}
           animate={{
             scale: 1.15,
-            backgroundPosition: [
-              "0% 50%",
-              "100% 50%",
-              "0% 50%",
-            ],
+            backgroundPosition: ["0% 50%", "100% 50%"],
           }}
           transition={{
             scale: {
               duration: 20,
-              ease: "linear",
+              ease: "easeInOut",
               repeat: Infinity,
               repeatType: "reverse",
             },
@@ -171,6 +172,7 @@ export default function LandingVariants({
               duration: 60,
               ease: "linear",
               repeat: Infinity,
+              repeatType: "reverse",
             },
           }}
         />
@@ -254,6 +256,25 @@ export default function LandingVariants({
                 >
                   Журнал
                 </button>
+
+                {/* ThankYou Preview Button - для тестирования */}
+                {onThankYouClick && (
+                  <button
+                    onClick={onThankYouClick}
+                    className="px-4 py-2 rounded-lg transition-all hover:bg-white/10"
+                    style={{
+                      color: "#FFFFFF",
+                      fontWeight: 500,
+                      fontSize: "0.9375rem",
+                      backgroundColor: "rgba(255,255,255,0.1)",
+                      border: "none",
+                      cursor: "pointer",
+                      opacity: 0.7,
+                    }}
+                  >
+                    Preview ThankYou
+                  </button>
+                )}
               </div>
 
               <nav className="flex items-center gap-6">
@@ -356,7 +377,7 @@ export default function LandingVariants({
                 Мы проверяем каждый лот и показываем реальную
                 картину: справедливую цену, скрытые риски и всё,
                 что нужно знать до покупки. Принимайте решения
-                на основе данных, а не доадок.
+                на основе данных, а не догадок.
               </p>
               <a
                 href="#subscribe"
@@ -853,7 +874,7 @@ export default function LandingVariants({
                 <ul className="space-y-3">
                   {[
                     "Автоматический сбор данных с торговых площадок",
-                    "Гибкие фильтры: регион, площадь, ВРИ, бюдж��т",
+                    "Гибкие фильтры: регион, площадь, ВРИ, бюджт",
                     "Уведомления в Telegram и на email",
                   ].map((item, i) => (
                     <li
@@ -928,7 +949,7 @@ export default function LandingVariants({
                 >
                   Сравниваем с аналогами, учитываем кадастровую
                   стоимость и рыночные данные. Вы понимаете,
-                  справедлива ли цена на торгах
+                  справедлиа ли цена на торгах
                 </p>
                 <ul className="space-y-3">
                   {[
@@ -993,7 +1014,7 @@ export default function LandingVariants({
                 <ul className="space-y-3">
                   {[
                     "Охранные зоны (ЗОУИТ): водоохранные, ЛЭП, газопроводы",
-                    "Обременения: арест��, залоги, сервитуты",
+                    "Обременения: арест, залоги, сервитуты",
                     "Категория земли и вид разрешённого использования",
                   ].map((item, i) => (
                     <li
@@ -1258,7 +1279,7 @@ export default function LandingVariants({
                 badgeColor: "#2196F3",
                 title: "Персональная подборка",
                 description:
-                  "Лоты в вашем регионе по вашим критериям",
+                  "Лоты в вашем регионе по ашим критериям",
               },
               {
                 badge: "Эксклюзив",
