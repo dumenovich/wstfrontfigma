@@ -16,9 +16,10 @@ import {
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ScrollReveal } from "./ScrollReveal";
 import { useState, useEffect } from "react";
+import { LogoVariant2 } from "./LogoVariants";
 
 interface ThankYouProps {
   email: string;
@@ -116,24 +117,53 @@ export default function ThankYou({
         />
 
         <div className="max-w-5xl mx-auto relative z-10">
-          {/* Back Button */}
-          {onBack && (
-            <motion.button
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              onClick={onBack}
-              className="mb-12 flex items-center gap-2 transition-all group"
-              style={{
-                color: "#FFFFFF",
-                fontSize: "0.9375rem",
-                fontWeight: 500,
-              }}
-            >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              <span>Вернуться на главную</span>
-            </motion.button>
-          )}
+          {/* Header - Same as Landing Page */}
+          <motion.header
+            className="py-4 mb-12"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="flex items-center justify-between">
+              {/* Logo with Text */}
+              <div className="flex items-center gap-3">
+                <LogoVariant2
+                  className="w-10 h-10"
+                  style={{
+                    color: "#FFFFFF",
+                    filter:
+                      "drop-shadow(0 2px 8px rgba(0,0,0,0.5)) drop-shadow(0 0 20px rgba(255,255,255,0.6)) drop-shadow(0 0 30px rgba(255,255,255,0.4))",
+                  }}
+                />
+                <span
+                  style={{
+                    color: "#FFFFFF",
+                    fontSize: "1.25rem",
+                    fontWeight: 600,
+                    textShadow: "0 2px 8px rgba(0,0,0,0.5)",
+                  }}
+                >
+                  zemscan.ru
+                </span>
+              </div>
+
+              {/* Back Button */}
+              {onBack && (
+                <button
+                  onClick={onBack}
+                  className="flex items-center gap-2 transition-all group"
+                  style={{
+                    color: "#FFFFFF",
+                    fontSize: "0.9375rem",
+                    fontWeight: 500,
+                  }}
+                >
+                  <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                  <span>Вернуться на главную</span>
+                </button>
+              )}
+            </div>
+          </motion.header>
 
           {/* Success Icon */}
           <motion.div
