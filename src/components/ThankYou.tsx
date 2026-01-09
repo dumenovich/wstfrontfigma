@@ -30,10 +30,16 @@ export default function ThankYou({
   email,
   onBack,
 }: ThankYouProps) {
-  // Генерируем случайное число подписчиков в диапазоне 180-320
-  const subscribersCount =
-    Math.floor(Math.random() * (320 - 180 + 1)) + 180;
+  // Генерируем случайное число подписчиков в диапазоне 180-320 ОДИН РАЗ
+  const [subscribersCount] = useState(() =>
+    Math.floor(Math.random() * (320 - 180 + 1)) + 180
+  );
   const [scrollY, setScrollY] = useState(0);
+
+  // Прокрутка наверх при монтировании компонента
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Track scroll for parallax effect
   useEffect(() => {
@@ -71,7 +77,7 @@ export default function ThankYou({
       style={{ backgroundColor: theme.accent.green }}
     >
       {/* Hero Section with Background */}
-      <section className="relative px-6 pt-8 pb-24 overflow-hidden">
+      <section className="relative px-6 pt-4 pb-24 overflow-hidden">
         {/* Background Image with Parallax */}
         <motion.div
           className="absolute inset-0 z-0"
@@ -111,12 +117,12 @@ export default function ThankYou({
           style={{
             height: "200px",
             background:
-              "linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%)",
+              "linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.35) 60%, transparent 100%)",
             pointerEvents: "none",
           }}
         />
 
-        <div className="max-w-5xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto relative z-10">
           {/* Header - Same as Landing Page */}
           <motion.header
             className="py-4 mb-12"
@@ -167,7 +173,7 @@ export default function ThankYou({
 
           {/* Success Icon */}
           <motion.div
-            className="text-center mb-8"
+            className="text-center mb-8 max-w-5xl mx-auto"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
@@ -293,7 +299,7 @@ export default function ThankYou({
                 {
                   icon: Award,
                   value: "3 месяца",
-                  label: "Бесплатного доступа для первых 500",
+                  label: "Бесплатного доступа для первх 500",
                 },
                 {
                   icon: TrendingUp,

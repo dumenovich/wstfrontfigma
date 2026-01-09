@@ -1,7 +1,16 @@
-import { useEffect } from 'react';
-import { CheckCircle2, Info, HelpCircle, AlertTriangle, XCircle, ArrowLeft } from 'lucide-react';
-import { Card } from './ui/card';
-import { Button } from './ui/button';
+import { useEffect, useState } from "react";
+import {
+  CheckCircle2,
+  Info,
+  HelpCircle,
+  AlertTriangle,
+  XCircle,
+  ArrowLeft,
+  Mail,
+} from "lucide-react";
+import { Card } from "./ui/card";
+import { motion } from "motion/react";
+import { LogoVariant2 } from "./LogoVariants";
 
 interface UnsubscribedProps {
   previewStatus?: string;
@@ -9,13 +18,20 @@ interface UnsubscribedProps {
 }
 
 export default function Unsubscribed({ previewStatus, onBack }: UnsubscribedProps) {
-  const status = previewStatus;
+  const [scrollY, setScrollY] = useState(0);
+
+  // Get status from URL using native JavaScript instead of useSearchParams
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlStatus = urlParams.get("status");
+  
+  // Use preview status if provided, otherwise use URL status
+  const status = previewStatus || urlStatus;
 
   // Запрет индексации поисковиками
   useEffect(() => {
-    const meta = document.createElement('meta');
-    meta.name = 'robots';
-    meta.content = 'noindex, nofollow';
+    const meta = document.createElement("meta");
+    meta.name = "robots";
+    meta.content = "noindex, nofollow";
     document.head.appendChild(meta);
 
     return () => {
@@ -23,140 +39,307 @@ export default function Unsubscribed({ previewStatus, onBack }: UnsubscribedProp
     };
   }, []);
 
-  // Если нет статуса и нет previewStatus, показываем ошибку
+  // Track scroll for parallax effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const theme = {
+    accent: {
+      green: "#5C7820",
+      darkGreen: "#3D4D21",
+      olive: "#6D8A28",
+      sage: "#7A9D30",
+      lightGreen: "#8FB438",
+      beige: "#FAFFF2",
+      lightGray: "#E8F0D8",
+      cream: "#F5FAE8",
+    },
+    text: {
+      primary: "#1A1A1A",
+      secondary: "#404040",
+      muted: "#737373",
+    },
+    border: "#E0E8D0",
+  };
+
+  // Protection from direct access - redirect to main page if no status
+  useEffect(() => {
+    if (!status) {
+      window.location.href = "/";
+    }
+  }, [status]);
+
+  // If no status, show loading or return null while redirecting
   if (!status) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950 flex items-center justify-center p-6">
-        <div className="text-center">
-          <h1 className="text-white text-2xl mb-4">Страница не найдена</h1>
-          <Button asChild className="bg-gradient-to-r from-cyan-500 to-blue-500">
-            <a href="/">На главную</a>
-          </Button>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   const messages = {
     success: {
-      title: 'Вы успешно отписались',
-      text: 'Вы больше не будете получать письма от zemscan. Если передумаете — всегда можете подписаться снова на главной странице.',
+      title: "Вы успешно отписались",
+      text: "Вы больше не будете получать письма от zemscan. Если передумаете — всегда можете подписаться снова на главной странице",
       icon: CheckCircle2,
-      iconColor: 'text-green-400',
-      glowColor: 'bg-green-500/30'
+      iconColor: theme.accent.green,
+      glowColor: theme.accent.sage,
     },
     already: {
-      title: 'Вы уже отписаны',
-      text: 'Этот email уже был отписан ранее.',
+      title: "Вы уже отписаны",
+      text: "Этот email уже был отписан ранее",
       icon: Info,
-      iconColor: 'text-blue-400',
-      glowColor: 'bg-blue-500/30'
+      iconColor: theme.accent.olive,
+      glowColor: theme.accent.lightGreen,
     },
     not_found: {
-      title: 'Подписка не найдена',
-      text: 'Возможно, вы уже отписались или ссылка устарела.',
+      title: "Подписка не найдена",
+      text: "Возможно, вы уже отписались или ссылка устарела",
       icon: HelpCircle,
-      iconColor: 'text-yellow-400',
-      glowColor: 'bg-yellow-500/30'
+      iconColor: "#D97706",
+      glowColor: "#FCD34D",
     },
     invalid: {
-      title: 'Неверная ссылка',
-      text: 'Ссылка для отписки повреждена или неполная.',
+      title: "Неверная ссылка",
+      text: "Ссылка повреждена или неполная",
       icon: AlertTriangle,
-      iconColor: 'text-orange-400',
-      glowColor: 'bg-orange-500/30'
+      iconColor: "#EA580C",
+      glowColor: "#FB923C",
     },
     error: {
-      title: 'Произошла ошибка',
-      text: 'Попробуйте позже или напишите нам на info@zemscan.ru',
+      title: "Произошла ошибка",
+      text: "Попробуйте позже или напишите нам на info@zemscan.ru",
       icon: XCircle,
-      iconColor: 'text-red-400',
-      glowColor: 'bg-red-500/30'
-    }
+      iconColor: "#DC2626",
+      glowColor: "#F87171",
+    },
   };
 
   const msg = messages[status as keyof typeof messages] || messages.error;
   const IconComponent = msg.icon;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950">
-      {/* Grid Pattern Background */}
-      <div className="fixed inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
-        }} />
-      </div>
+    <div
+      className="min-h-screen"
+      style={{ backgroundColor: theme.accent.green }}
+    >
+      {/* Hero Section with Background */}
+      <section className="relative px-6 pt-4 pb-12 min-h-screen overflow-hidden flex flex-col">
+        {/* Background Image with Parallax */}
+        <motion.div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url('https://pibig.info/uploads/posts/2023-11/thumbs/1699031559_pibig-info-p-polyana-trava-fon-pinterest-1.jpg')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            transform: `translateY(${scrollY * 0.3}px) scale(${
+              1 + scrollY * 0.0002
+            })`,
+            willChange: "transform",
+          }}
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1.15 }}
+          transition={{
+            duration: 20,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        />
 
-      {/* Animated Background */}
-      <div className="fixed inset-0 overflow-hidden opacity-30">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-500 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-cyan-500 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-pulse delay-500" />
-      </div>
+        {/* Dark Overlay */}
+        <motion.div
+          className="absolute inset-0 z-0"
+          initial={{ backgroundColor: "rgba(0, 0, 0, 0.35)" }}
+          animate={{ backgroundColor: "rgba(0, 0, 0, 0.30)" }}
+          transition={{
+            duration: 4,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        />
 
-      <div className="relative z-10 min-h-screen flex items-center justify-center p-6">
-        <div className="max-w-md w-full">
-          {/* Кнопка "Назад" */}
-          {onBack && (
-            <button
-              onClick={onBack}
-              className="mb-8 flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors group"
+        {/* Gradient overlay for better readability */}
+        <div
+          className="absolute top-0 left-0 right-0 z-0"
+          style={{
+            height: "200px",
+            background:
+              "linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.35) 60%, transparent 100%)",
+            pointerEvents: "none",
+          }}
+        />
+
+        <div className="max-w-7xl w-full mx-auto relative z-10">
+          {/* Header - Same as Landing Page */}
+          <motion.header
+            className="py-4 mb-12"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="flex items-center justify-between">
+              {/* Logo with Text */}
+              <a
+                href="/"
+                className="flex items-center gap-3 transition-opacity hover:opacity-80"
+              >
+                <LogoVariant2
+                  className="w-10 h-10"
+                  style={{
+                    color: "#FFFFFF",
+                    filter:
+                      "drop-shadow(0 2px 8px rgba(0,0,0,0.5)) drop-shadow(0 0 20px rgba(255,255,255,0.6)) drop-shadow(0 0 30px rgba(255,255,255,0.4))",
+                  }}
+                />
+                <span
+                  style={{
+                    color: "#FFFFFF",
+                    fontSize: "1.25rem",
+                    fontWeight: 600,
+                    textShadow: "0 2px 8px rgba(0,0,0,0.5)",
+                  }}
+                >
+                  zemscan.ru
+                </span>
+              </a>
+
+              {/* Back Button */}
+              <a
+                href="/"
+                className="flex items-center gap-2 transition-all group"
+                style={{
+                  color: "#FFFFFF",
+                  fontSize: "0.9375rem",
+                  fontWeight: 500,
+                  textDecoration: "none",
+                }}
+              >
+                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                <span>Вернуться на главную</span>
+              </a>
+            </div>
+          </motion.header>
+
+          {/* Main Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{
+              duration: 0.6,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="max-w-2xl mx-auto"
+          >
+            <Card
+              className="rounded-3xl p-8 md:p-10 shadow-2xl"
+              style={{
+                backgroundColor: "#FFFFFF",
+                border: `2px solid ${theme.border}`,
+              }}
             >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              <span>Вернуться на главную</span>
-            </button>
-          )}
-
-          <Card className="bg-white/5 backdrop-blur-xl border-white/10 p-8">
-            {/* Иконка с эффектом свечения */}
-            <div className="flex justify-center mb-6">
-              <div className="relative">
-                <div className={`absolute inset-0 ${msg.glowColor} blur-2xl rounded-full animate-pulse`} />
-                <div className="relative bg-white/10 rounded-full p-4">
-                  <IconComponent className={`w-12 h-12 ${msg.iconColor}`} />
+              {/* Icon with Glow Effect */}
+              <div className="flex justify-center mb-6">
+                <div className="relative">
+                  {/* Animated glow */}
+                  <motion.div
+                    className="absolute inset-0 blur-3xl rounded-full"
+                    style={{
+                      backgroundColor: msg.glowColor,
+                    }}
+                    initial={{ opacity: 0.3, scale: 0.8 }}
+                    animate={{
+                      opacity: [0.3, 0.5, 0.3],
+                      scale: [0.8, 1.2, 0.8],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                  <div
+                    className="relative rounded-full shadow-2xl flex items-center justify-center"
+                    style={{
+                      width: "80px",
+                      height: "80px",
+                      background: `linear-gradient(135deg, ${msg.iconColor} 0%, ${msg.glowColor} 100%)`,
+                      boxShadow: `0 20px 60px ${msg.iconColor}40`,
+                    }}
+                  >
+                    <IconComponent
+                      className="w-10 h-10"
+                      style={{ color: "#FFFFFF" }}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Заголовок */}
-            <h1 className="text-2xl text-white text-center mb-4">
-              {msg.title}
-            </h1>
-
-            {/* Текст */}
-            <p className="text-slate-300 text-center mb-8 leading-relaxed">
-              {msg.text}
-            </p>
-
-            {/* Кнопка на главную */}
-            <div className="flex justify-center">
-              <Button
-                asChild
-                className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-8"
+              {/* Title */}
+              <h1
+                className="text-center mb-4"
+                style={{
+                  fontSize: "clamp(1.5rem, 3.5vw, 2rem)",
+                  fontWeight: 600,
+                  color: theme.text.primary,
+                  lineHeight: "1.2",
+                }}
               >
-                <a href="/">
-                  На главную
-                </a>
-              </Button>
-            </div>
-          </Card>
+                {msg.title}
+              </h1>
 
-          {/* Контактная информация */}
-          <div className="mt-6 text-center">
-            <p className="text-slate-400 text-sm">
-              Есть вопросы?{' '}
-              <a 
-                href="mailto:info@zemscan.ru" 
-                className="text-cyan-400 hover:text-cyan-300 transition-colors"
+              {/* Description */}
+              <p
+                className="text-center mb-8 max-w-md mx-auto"
+                style={{
+                  fontSize: "1rem",
+                  color: theme.text.secondary,
+                  lineHeight: "1.6",
+                }}
               >
-                info@zemscan.ru
-              </a>
-            </p>
-          </div>
+                {msg.text}
+              </p>
+
+              {/* Divider */}
+              <div
+                className="h-px mb-5"
+                style={{ backgroundColor: theme.border }}
+              />
+
+              {/* Contact Info */}
+              <div className="text-center">
+                <p
+                  className="flex items-center justify-center gap-2"
+                  style={{
+                    fontSize: "0.875rem",
+                    color: theme.text.muted,
+                  }}
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>
+                    Есть вопросы?{" "}
+                    <a
+                      href="mailto:info@zemscan.ru"
+                      className="transition-colors"
+                      style={{
+                        color: theme.accent.green,
+                        fontWeight: 500,
+                      }}
+                    >
+                      info@zemscan.ru
+                    </a>
+                  </span>
+                </p>
+              </div>
+            </Card>
+          </motion.div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

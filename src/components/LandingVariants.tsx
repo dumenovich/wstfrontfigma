@@ -17,6 +17,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { ScrollReveal } from "./ScrollReveal";
 import { AnimatedMap } from "./AnimatedMap";
+import { subscribeEmail } from "../lib/api";
 import heroBackgroundImage from "figma:asset/798e29d2c40107009abeae5789874b5f0b72ab00.png";
 
 type Theme = {
@@ -50,7 +51,9 @@ type Props = {
   onLoginClick: () => void;
   onBlogClick: () => void;
   onThankYouClick?: () => void;
+  onUnsubscribeClick?: () => void;
   toggleTheme: () => void;
+  onEmailSubmit?: (email: string) => void;
 };
 
 const dashboardImage =
@@ -68,15 +71,19 @@ const growthImage =
 const portfolioImage =
   "https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbnZlc3RtZW50JTIwcG9ydGZvbGlvfGVufDF8fHx8MTc2Njk2Njk1NHww&ixlib=rb-4.1.0&q=80&w=1080";
 
-export default function LandingVariants({
+export function LandingVariants({
   theme,
   isDark,
   onLoginClick,
   onBlogClick,
   onThankYouClick,
+  onUnsubscribeClick,
   toggleTheme,
+  onEmailSubmit,
 }: Props) {
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [audienceIndex, setAudienceIndex] = useState(0);
   const [scrollY, setScrollY] = useState(0);
@@ -96,6 +103,17 @@ export default function LandingVariants({
     return () => clearInterval(interval);
   }, []);
 
+  // Auto-hide error message after 7 seconds
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError("");
+      }, 7000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
   // Track scroll for parallax effect
   useEffect(() => {
     const handleScroll = () => {
@@ -109,12 +127,40 @@ export default function LandingVariants({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Email submitted:", email);
-    alert("Спасибо за подписку! Мы сообщим о запуске.");
-    setEmail("");
-    if (onThankYouClick) {
-      onThankYouClick();
+    
+    if (!email) {
+      setError("Пожалуйста, введите ваш email");
+      return;
     }
+    
+    console.log("Email submitted:", email);
+    
+    // Сохраняем email перед очисткой
+    const submittedEmail = email;
+    
+    // Вызов функции передачи email - ДО очистки
+    if (onEmailSubmit) {
+      onEmailSubmit(submittedEmail);
+    }
+    
+    // Очищаем поле
+    setEmail("");
+    
+    // Отправка на бэкенд (асинхронно, не блокируя UI)
+    setIsLoading(true);
+    subscribeEmail(submittedEmail)
+      .then(() => {
+        if (onThankYouClick) {
+          onThankYouClick();
+        }
+      })
+      .catch(err => {
+        console.error("Ошибка отправки email:", err);
+        setError("Ошибка отправки email. Попробуйте снова.");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const faqs = [
@@ -273,6 +319,25 @@ export default function LandingVariants({
                     }}
                   >
                     Preview ThankYou
+                  </button>
+                )}
+
+                {/* Unsubscribe Preview Button - для тестирования */}
+                {onUnsubscribeClick && (
+                  <button
+                    onClick={onUnsubscribeClick}
+                    className="px-4 py-2 rounded-lg transition-all hover:bg-white/10"
+                    style={{
+                      color: "#FFFFFF",
+                      fontWeight: 500,
+                      fontSize: "0.9375rem",
+                      backgroundColor: "rgba(255,255,255,0.1)",
+                      border: "none",
+                      cursor: "pointer",
+                      opacity: 0.7,
+                    }}
+                  >
+                    Preview Unsubscribe
                   </button>
                 )}
               </div>
@@ -513,7 +578,7 @@ export default function LandingVariants({
               }}
             >
               Ошибка при покупке земли стоит дорого — и
-              исправить её нельзя
+              исравить её нельзя
             </h2>
             <p
               className="text-lg"
@@ -873,7 +938,7 @@ export default function LandingVariants({
                 </p>
                 <ul className="space-y-3">
                   {[
-                    "Автоматический сбор данных с торговых площадок",
+                    "Автоматический сбор даннх с торговых площадок",
                     "Гибкие фильтры: регион, площадь, ВРИ, бюджт",
                     "Уведомления в Telegram и на email",
                   ].map((item, i) => (
@@ -1272,7 +1337,7 @@ export default function LandingVariants({
                 badgeColor: "#4CAF50",
                 title: "PDF-гайд",
                 description:
-                  "«7 скрытых рисков при покупке земли» — сразу на почту",
+                  "«7 скрытых рисков при покупке земли» — сразу на очту",
               },
               {
                 badge: "При запуске",
@@ -1395,35 +1460,63 @@ export default function LandingVariants({
             >
               Получите ранний доступ
             </h3>
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto mb-4"
-            >
-              <Input
-                type="email"
-                placeholder="Ваш email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="flex-1 px-6 py-4 rounded-xl"
-                style={{
-                  backgroundColor: "rgba(255,255,255,0.95)",
-                  border: "none",
-                  color: "#1A1A1A",
-                }}
-              />
-              <Button
-                type="submit"
-                className="px-8 py-4 rounded-xl transition-all hover:opacity-90"
-                style={{
-                  backgroundColor: "#1A1A1A",
-                  color: "#FFFFFF",
-                  border: "none",
-                }}
+            <div className="max-w-lg mx-auto">
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col sm:flex-row gap-4"
               >
-                Подписаться
-              </Button>
-            </form>
+                <Input
+                  type="email"
+                  placeholder="Ваш email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setError(""); // Очищаем ошибку при вводе
+                  }}
+                  required
+                  className="flex-1 px-6 py-4 rounded-xl"
+                  style={{
+                    backgroundColor: "rgba(255,255,255,0.95)",
+                    border: "none",
+                    color: "#1A1A1A",
+                  }}
+                />
+                <Button
+                  type="submit"
+                  disabled={isLoading}
+                  className="px-8 py-4 rounded-xl transition-all hover:opacity-90 disabled:opacity-50"
+                  style={{
+                    backgroundColor: "#1A1A1A",
+                    color: "#FFFFFF",
+                    border: "none",
+                  }}
+                >
+                  {isLoading ? "Подписка..." : "Подписаться"}
+                </Button>
+              </form>
+              
+              {/* Error Message - под формой */}
+              <AnimatePresence mode="wait">
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.8 }}
+                    className="mt-4 px-5 py-3 rounded-xl text-center"
+                    style={{
+                      backgroundColor: "rgba(255, 220, 100, 0.95)",
+                      color: "#8B4513",
+                      fontSize: "0.9375rem",
+                      fontWeight: 500,
+                      border: "1px solid rgba(139, 69, 19, 0.2)",
+                    }}
+                  >
+                    {error}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </section>

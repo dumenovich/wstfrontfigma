@@ -3,10 +3,11 @@ import { Send, LogIn, Moon, Sun } from "lucide-react";
 import { LogoVariant2 } from "./components/LogoVariants";
 import Blog from "./components/Blog";
 import Login from "./components/Login";
-import LandingVariants from "./components/LandingVariants";
+import { LandingVariants } from "./components/LandingVariants";
 import BlogPage from "./pages/Blog";
 import ArticlePage from "./pages/Article";
 import ThankYou from "./components/ThankYou";
+import Unsubscribed from "./components/Unsubscribed";
 
 export default function App() {
   const [showBlogPreview, setShowBlogPreview] = useState(false);
@@ -14,7 +15,9 @@ export default function App() {
   const [showBlogPage, setShowBlogPage] = useState(false);
   const [showArticle, setShowArticle] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
+  const [showUnsubscribed, setShowUnsubscribed] = useState(false);
   const [selectedArticleId, setSelectedArticleId] = useState<number | null>(null);
+  const [subscribedEmail, setSubscribedEmail] = useState<string>("");
   const [isDark, setIsDark] = useState(() => {
     const saved = localStorage.getItem("theme");
     return saved === "dark";
@@ -116,7 +119,20 @@ export default function App() {
 
   // Показываем страницу благодарности
   if (showThankYou) {
-    return <ThankYou email="test@example.com" onBack={() => setShowThankYou(false)} />;
+    return (
+      <ThankYou 
+        email={subscribedEmail || "test@example.com"} 
+        onBack={() => {
+          setShowThankYou(false);
+          setSubscribedEmail("");
+        }} 
+      />
+    );
+  }
+
+  // Показываем страницу отписки
+  if (showUnsubscribed) {
+    return <Unsubscribed previewStatus="success" onBack={() => setShowUnsubscribed(false)} />;
   }
 
   return (
@@ -131,7 +147,9 @@ export default function App() {
         onLoginClick={() => setShowLogin(true)}
         onBlogClick={() => setShowBlogPage(true)}
         onThankYouClick={() => setShowThankYou(true)}
+        onUnsubscribeClick={() => setShowUnsubscribed(true)}
         toggleTheme={toggleTheme}
+        onEmailSubmit={(email) => setSubscribedEmail(email)}
       />
     </div>
   );
