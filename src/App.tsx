@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import { LandingVariants } from "./components/LandingVariants";
 import BlogPage from "./pages/Blog";
 import ArticlePage from "./pages/Article";
+import MapPage from "./pages/Map";
 import ThankYou from "./components/ThankYou";
 import Unsubscribed from "./components/Unsubscribed";
 
@@ -14,6 +15,7 @@ export default function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showBlogPage, setShowBlogPage] = useState(false);
   const [showArticle, setShowArticle] = useState(false);
+  const [showMap, setShowMap] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
   const [showUnsubscribed, setShowUnsubscribed] = useState(false);
   const [selectedArticleId, setSelectedArticleId] = useState<number | null>(null);
@@ -117,6 +119,19 @@ export default function App() {
     );
   }
 
+  // Показываем карту
+  if (showMap) {
+    return (
+      <MapPage
+        onBack={() => setShowMap(false)}
+        onBlogClick={() => {
+          setShowMap(false);
+          setShowBlogPage(true);
+        }}
+      />
+    );
+  }
+
   // Показываем страницу благодарности
   if (showThankYou) {
     return (
@@ -146,6 +161,7 @@ export default function App() {
         isDark={isDark}
         onLoginClick={() => setShowLogin(true)}
         onBlogClick={() => setShowBlogPage(true)}
+        onMapClick={() => setShowMap(true)}
         onThankYouClick={() => setShowThankYou(true)}
         onUnsubscribeClick={() => setShowUnsubscribed(true)}
         toggleTheme={toggleTheme}

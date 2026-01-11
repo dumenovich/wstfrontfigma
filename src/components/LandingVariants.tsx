@@ -12,12 +12,14 @@ import {
   LineChart,
   Layers,
   Zap,
+  Mail,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { ScrollReveal } from "./ScrollReveal";
 import { AnimatedMap } from "./AnimatedMap";
 import { subscribeEmail } from "../lib/api";
+import { EmailPreview } from "./EmailPreview";
 import heroBackgroundImage from "figma:asset/798e29d2c40107009abeae5789874b5f0b72ab00.png";
 
 type Theme = {
@@ -50,6 +52,7 @@ type Props = {
   isDark: boolean;
   onLoginClick: () => void;
   onBlogClick: () => void;
+  onMapClick?: () => void;
   onThankYouClick?: () => void;
   onUnsubscribeClick?: () => void;
   toggleTheme: () => void;
@@ -76,6 +79,7 @@ export function LandingVariants({
   isDark,
   onLoginClick,
   onBlogClick,
+  onMapClick,
   onThankYouClick,
   onUnsubscribeClick,
   toggleTheme,
@@ -87,6 +91,7 @@ export function LandingVariants({
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [audienceIndex, setAudienceIndex] = useState(0);
   const [scrollY, setScrollY] = useState(0);
+  const [isEmailPreviewOpen, setIsEmailPreviewOpen] = useState(false);
 
   const audiences = [
     "для покупателей",
@@ -289,7 +294,10 @@ export function LandingVariants({
 
                 {/* Журнал link - рядом с логотипом */}
                 <button
-                  onClick={onBlogClick}
+                  onClick={() => {
+                    console.log("Blog button clicked");
+                    onBlogClick();
+                  }}
                   className="px-4 py-2 rounded-lg transition-all hover:bg-white/10"
                   style={{
                     color: "#FFFFFF",
@@ -302,6 +310,24 @@ export function LandingVariants({
                 >
                   Журнал
                 </button>
+
+                {/* Map link - для preview карты */}
+                {onMapClick && (
+                  <button
+                    onClick={onMapClick}
+                    className="px-4 py-2 rounded-lg transition-all hover:bg-white/10"
+                    style={{
+                      color: "#FFFFFF",
+                      fontWeight: 500,
+                      fontSize: "0.9375rem",
+                      backgroundColor: "rgba(255,255,255,0.1)",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Карта
+                  </button>
+                )}
 
                 {/* ThankYou Preview Button - для тестирования */}
                 {onThankYouClick && (
@@ -340,6 +366,23 @@ export function LandingVariants({
                     Preview Unsubscribe
                   </button>
                 )}
+
+                {/* Email Preview Button */}
+                <button
+                  onClick={() => setIsEmailPreviewOpen(true)}
+                  className="px-4 py-2 rounded-lg transition-all hover:bg-white/10 flex items-center gap-2"
+                  style={{
+                    color: "#FFFFFF",
+                    fontWeight: 500,
+                    fontSize: "0.9375rem",
+                    backgroundColor: "rgba(255,255,255,0.1)",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>Preview Email</span>
+                </button>
               </div>
 
               <nav className="flex items-center gap-6">
@@ -439,7 +482,7 @@ export function LandingVariants({
                   lineHeight: "1.5",
                 }}
               >
-                Мы проверяем каждый лот и показываем реальную
+                Мы проверяем каждый лот и пок��зываем реальную
                 картину: справедливую цену, скрытые риски и всё,
                 что нужно знать до покупки. Принимайте решения
                 на основе данных, а не догадок.
@@ -1625,6 +1668,13 @@ export function LandingVariants({
           </div>
         </div>
       </footer>
+
+      {/* Email Preview Modal */}
+      <EmailPreview
+        isOpen={isEmailPreviewOpen}
+        onClose={() => setIsEmailPreviewOpen(false)}
+        theme={theme}
+      />
     </main>
   );
 }

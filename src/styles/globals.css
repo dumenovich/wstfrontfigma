@@ -234,3 +234,29 @@ html {
 .animated-glow {
   animation: glowPulse 4s ease-in-out infinite;
 }
+
+/* Custom scrollbar styles for zemscan theme */
+.filters-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.filters-scrollbar::-webkit-scrollbar-track {
+  background: #F9FAFB;
+  border-radius: 10px;
+}
+
+.filters-scrollbar::-webkit-scrollbar-thumb {
+  background: #5C7820;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.filters-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #3D4D21;
+}
+
+/* Firefox scrollbar */
+.filters-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #5C7820 #F9FAFB;
+}

@@ -393,7 +393,7 @@ export default function Blog({ onBack }: BlogProps) {
           {/* Right - Year */}
           <div className="flex items-center gap-6">
             <div className="text-blue-400/60 text-sm">
-              © 2025, Wasteland Tech
+              © 2025, Wasteland Tech 1
             </div>
           </div>
         </div>
